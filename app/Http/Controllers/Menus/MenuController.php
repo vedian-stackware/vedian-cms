@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Articles;
+namespace App\Http\Controllers\Menus;
 
 use App\Enumerations\Status;
 use App\Http\Controllers\Controller;
@@ -14,18 +14,18 @@ use function json_decode;
 use function redirect;
 use function response;
 
-class ArticleController extends Controller
+class MenuController extends Controller
 {
     public function index()
     {
-        return Inertia::render('articles', [
+        return Inertia::render('menus', [
             'articles' => Article::linkables()
         ]);
     }
 
     public function show(Article $article)
     {
-        return Inertia::render('articles/show', [
+        return Inertia::render('menus/show', [
             'id' => $article->id,
             'article' => $article,
             'data' => ['content' => $article->content]
@@ -34,7 +34,7 @@ class ArticleController extends Controller
 
     public function create()
     {
-        return Inertia::render('articles/create', [
+        return Inertia::render('menus/create', [
             'authors' => User::all(),
             'statuses' => Status::cases(),
             'defaultStatus' => Status::draft()
@@ -50,6 +50,6 @@ class ArticleController extends Controller
 
         $article = Article::create($data);
 
-        return redirect()->route('articles.create');
+        return redirect()->route('menus.create');
     }
 }
