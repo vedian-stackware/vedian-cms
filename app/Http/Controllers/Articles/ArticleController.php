@@ -7,7 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Articles\ArticleRequest;
 use App\Models\Article;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
+use function dd;
+use function json_decode;
+use function redirect;
 
 class ArticleController extends Controller
 {
@@ -27,7 +31,12 @@ class ArticleController extends Controller
 
     public function store(ArticleRequest $request)
     {
-        $article = Article::create($request->validated());
-        return redirect(route('articles.create'));
+
+        $data = array_merge($request->validated(), $request->all());
+        $data['slug'] = Str::slug($data['title'], '-');
+        $data['content'] = (object)json_decode($data['content']);
+        $article = Article::create($data);
+
+        return redirect()->route('articles.create');
     }
 }

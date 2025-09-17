@@ -14,15 +14,15 @@ class ArticleRequest extends FormRequest
 
         return [
             'title' => ['required'],
-            'slug' => ['required', 'unique:articles,slug'],
+//            'slug' => ['nullable', 'unique:articles,slug'],
             'content' => ['nullable'],
             'author_id' => ['required', 'exists:users,id'],
-            'parent_id' => ['nullable'],
+//            'parent_id' => ['nullable'],
             'status' => ['required', "in:{$statuses}"],
-            'template' => ['nullable'],
-            'featured_image' => ['nullable'],
-            'excerpt' => ['nullable'],
-            'slug_override' => ['nullable'],
+//            'template' => ['nullable'],
+//            'featured_image' => ['nullable'],
+//            'excerpt' => ['nullable'],
+//            'slug_override' => ['nullable'],
 //            'published_at' => ['required', 'timestamp'],
         ];
     }

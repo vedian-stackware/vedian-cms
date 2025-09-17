@@ -14,7 +14,7 @@ return new class extends Migration {
             // Core page info
             $table->string('title');
             $table->string('slug')->unique(); // for URL
-            $table->longText('articles')->nullable();
+            $table->json('content')->nullable();
             $table->string('type')->default('page'); // page, blog, comment, topic
 
             // Relations
