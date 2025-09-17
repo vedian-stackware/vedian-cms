@@ -1,5 +1,5 @@
 // puck.config.tsx
-import { Config, Content, DropZone } from '@measured/puck';
+import { Config, Content } from '@measured/puck';
 import { JSX } from 'react';
 
 type Props = {
