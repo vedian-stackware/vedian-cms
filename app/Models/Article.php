@@ -66,6 +66,7 @@ class Article extends Model
             'published_at' => 'timestamp',
             'content' => 'json',
             'status' => \App\Enumerations\Status::class,
+            'type' => \App\Enumerations\ContentType::class,
         ];
     }
 }
