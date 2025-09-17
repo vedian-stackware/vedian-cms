@@ -35,6 +35,7 @@ export default function Create() {
     const { auth } = usePage<SharedData>().props;
     const save = (puckData: any, e?: React.FormEvent) => {
         if (e) e.preventDefault();
+        console.log(puckData);
 
         router.post(ArticleController.store().url, {
             title: puckData.root?.props?.title ?? '',

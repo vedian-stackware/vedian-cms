@@ -12,12 +12,21 @@ use Inertia\Inertia;
 use function dd;
 use function json_decode;
 use function redirect;
+use function response;
 
 class ArticleController extends Controller
 {
     public function index()
     {
         return Inertia::render('articles', []);
+    }
+    public function show(Article $article)
+    {
+        return Inertia::render('articles/show', [
+            'id' => $article->id,
+            'article' => $article,
+            'data' => ['content' => $article->content]
+        ]);
     }
 
     public function create()
@@ -34,7 +43,8 @@ class ArticleController extends Controller
 
         $data = array_merge($request->validated(), $request->all());
         $data['slug'] = Str::slug($data['title'], '-');
-        $data['content'] = (object)json_decode($data['content']);
+        $data['content'] = (object)json_decode($data['content'])->content;
+
         $article = Article::create($data);
 
         return redirect()->route('articles.create');

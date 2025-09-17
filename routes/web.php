@@ -3,11 +3,9 @@
 use App\Http\Controllers\Articles\ArticleController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\Settings\ProfileController;
+use App\Http\Controllers\HomepageController;
 
-Route::get('/', function () {
-    return Inertia::render('welcome');
-})->name('home');
+Route::get('/{slug?}', [HomepageController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
