@@ -1,10 +1,9 @@
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
-import ArticlesLayout from '@/layouts/articles/layout';
-import { show } from '@/routes/articles';
+import { show } from '@/routes/menus';
 import { type BreadcrumbItem, type SharedData } from '@/types';
 import { Form, Head, usePage, useForm } from '@inertiajs/react';
-import { articles } from '@/routes';
+import { menus } from '@/routes';
 import { Input } from '@/components/ui/input';
 import InputError from '@/components/input-error';
 import { Label } from '@/components/ui/label';
@@ -20,22 +19,20 @@ import { Render } from '@measured/puck';
 
 let hrefId = 0;
 
-let breadcrumbs: BreadcrumbItem[] = [];
+let breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Menus',
+        href: menus().url
+    },
+    {
+        title: 'Show',
+        href: show(hrefId).url
+    }
+];
 
 export default function Show({ id, article, data }: { id: number, article: any, data: any }) {
     hrefId = id;
-    breadcrumbs = [
-        {
-            title: 'Articles',
-            href: articles().url
-        },
-        {
-            title: 'Show',
-            href: show(hrefId).url
-        }
-    ];
     console.log(article);
     console.log(breadcrumbs);
     return;
-    // return <Render config={config} data={data} />;
 }

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Arr;
 use function is_array;
+use App\Utils\ArticleLink;
 
 class Article extends Model
 {
@@ -44,11 +45,27 @@ class Article extends Model
         return self::where('slug', $slug)->firstOrFail();
     }
 
+    public function getHrefAttribute()
+    {
+        return url($this->slug);
+    }
+
+    public static function linkables()
+    {
+        return ArticleLink::collect();
+    }
+
+    public function linkable()
+    {
+        return ArticleLink::from($this);
+    }
+
     protected function casts()
     {
         return [
             'published_at' => 'timestamp',
             'content' => 'json',
+            'status' => \App\Enumerations\Status::class,
         ];
     }
 }

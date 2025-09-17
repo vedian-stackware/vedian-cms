@@ -1,28 +1,33 @@
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
 import ArticleLayout from '@/layouts/articles/layout';
-import { articles, dashboard } from '@/routes';
+import { articles, dashboard, menus } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
-import { Head, Link } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
+import MenusLayout from '@/layouts/menus/layout';
+import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from '@/components/ui/navigation-menu';
+import { Select } from '@/components/ui/select';
 import { show } from '@/routes/articles';
-import { Button } from '@/components/ui/button';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Articles',
-        href: articles().url,
+        title: 'Menus',
+        href: menus().url
     },
     {
         title: 'Overview',
-        href: articles().url,
-    },
+        href: menus().url
+    }
 ];
 
-export default function Articles({articles}:{articles:any}) {
+export default function Articles({ articles }: { articles: any }) {
+
+    console.log(articles);
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Articles" />
-            <ArticleLayout>
+            <Head title="Menus" />
+            <MenusLayout>
                 <table>
                     <thead>
                     <tr>
@@ -39,8 +44,8 @@ export default function Articles({articles}:{articles:any}) {
                             <td>{article.slug}</td>
                             <td>{article.href}</td>
                             <td>{article.status}</td>
-                            <td><Link href={show(article.id).url}>
-                                edit</Link></td>
+                            <td><a href={show(article.id).url}>
+                                asda</a></td>
                         </tr>
                         // <a key={article.id} href={article.href}>
                         //     {article.title} | {article.href} | {article.status}
@@ -49,7 +54,7 @@ export default function Articles({articles}:{articles:any}) {
                     ))}
                     </tbody>
                 </table>
-            </ArticleLayout>
+            </MenusLayout>
 
         </AppLayout>
     );
