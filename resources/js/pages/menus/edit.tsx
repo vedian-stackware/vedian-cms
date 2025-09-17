@@ -32,7 +32,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 const initialData = { root: { props: {} } };
 
 
-export default function Edit({ article }: { article: SharedData }) {
+export default function Edit({ article }: { article: any }) {
     const { auth } = usePage<SharedData>().props;
     const data: any = article.content;
     const save = (puckData: any, e?: React.FormEvent) => {
