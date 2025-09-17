@@ -41,7 +41,7 @@ export default function Edit({ article }: { article: SharedData }) {
             title: puckData.root?.props?.title ?? '',
             content: JSON.stringify(puckData),
             author_id: auth.user.id,
-            status: 'draft'
+            status: puckData.root?.props?.status ?? 'draft'
         }, {
             preserveState: false,
             preserveScroll: true // optional

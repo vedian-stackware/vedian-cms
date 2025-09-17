@@ -41,21 +41,22 @@ export default function Create() {
             title: puckData.root?.props?.title ?? '',
             content: JSON.stringify(puckData),
             author_id: auth.user.id,
-            status: 'draft'}, {
+            status: puckData.root?.props?.status ?? 'draft'
+        }, {
             preserveState: false,
-            preserveScroll: true, // optional
-        })
+            preserveScroll: true // optional
+        });
     };
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Article create" />
             <ArticlesLayout>
-                    <Puck
-                        config={config}
-                        data={initialData}
-                        onPublish={save}
-                    />
+                <Puck
+                    config={config}
+                    data={initialData}
+                    onPublish={save}
+                />
             </ArticlesLayout>
 
         </AppLayout>

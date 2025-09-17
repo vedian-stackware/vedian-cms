@@ -41,7 +41,15 @@ export const config: Config<Props> = {
     root: {
         fields: {
             title: { type: 'text' },
-            description: { type: 'textarea' }
+            description: { type: 'textarea' },
+            status: {
+                type: 'select', options: [
+                    { value: 'draft', label: 'Draft' },
+                    { value: 'published', label: 'Publish' },
+                    { value: 'archived', label: 'Archive' },
+                    { value: 'deleted', label: 'Trash' }
+                ]
+            }
         },
         defaultProps: {
             title: 'Hello, world',
@@ -50,8 +58,8 @@ export const config: Config<Props> = {
         render: ({ children, title, description }) => {
             return (
                 <div>
-                    <h1>{title}</h1>
-                    <p>{description}</p>
+                    {/*<h1>{title}</h1>*/}
+                    {/*<p>{description}</p>*/}
                     {children}
                 </div>
             );
