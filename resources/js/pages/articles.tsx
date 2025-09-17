@@ -4,7 +4,7 @@ import ArticleLayout from '@/layouts/articles/layout';
 import { articles, dashboard } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
-import { show } from '@/routes/articles';
+import { edit } from '@/routes/articles';
 import { Button } from '@/components/ui/button';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -39,7 +39,7 @@ export default function Articles({articles}:{articles:any}) {
                             <td>{article.slug}</td>
                             <td>{article.href}</td>
                             <td>{article.status}</td>
-                            <td><Link href={show(article.id).url}>
+                            <td><Link href={edit(article.id).url}>
                                 edit</Link></td>
                         </tr>
                         // <a key={article.id} href={article.href}>
