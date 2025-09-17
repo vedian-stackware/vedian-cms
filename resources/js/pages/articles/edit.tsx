@@ -50,7 +50,7 @@ export default function Edit({ article }: { article: SharedData }) {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Article create" />
+            <Head title="Article edit" />
             <ArticlesLayout>
                 <Puck
                     config={config}
