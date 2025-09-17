@@ -31,31 +31,32 @@ const breadcrumbs: BreadcrumbItem[] = [
 const initialData = { root: { props: {} } };
 
 
-export default function Create() {
+export default function Edit({ article }: { article: SharedData }) {
     const { auth } = usePage<SharedData>().props;
+    const data: any = article.content;
     const save = (puckData: any, e?: React.FormEvent) => {
         if (e) e.preventDefault();
         console.log(puckData);
-
-        router.post(ArticleController.store().url, {
+        router.put(ArticleController.update(article.id).url, {
             title: puckData.root?.props?.title ?? '',
             content: JSON.stringify(puckData),
             author_id: auth.user.id,
-            status: 'draft'}, {
+            status: 'draft'
+        }, {
             preserveState: false,
-            preserveScroll: true, // optional
-        })
+            preserveScroll: true // optional
+        });
     };
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Article create" />
             <ArticlesLayout>
-                    <Puck
-                        config={config}
-                        data={initialData}
-                        onPublish={save}
-                    />
+                <Puck
+                    config={config}
+                    data={data}
+                    onPublish={save}
+                />
             </ArticlesLayout>
 
         </AppLayout>

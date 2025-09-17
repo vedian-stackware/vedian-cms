@@ -41,6 +41,15 @@ class ArticleController extends Controller
         ]);
     }
 
+    public function edit(Article $article)
+    {
+        return Inertia::render('articles/edit', [
+            'article' => $article,
+            'statuses' => Status::cases(),
+            'defaultStatus' => Status::draft()
+        ]);
+    }
+
     public function store(ArticleRequest $request)
     {
 
@@ -51,5 +60,19 @@ class ArticleController extends Controller
         $article = Article::create($data);
 
         return redirect()->route('articles.create');
+    }
+
+    public function update(ArticleRequest $request, Article $article)
+    {
+
+        $data = array_merge($request->validated(), $request->all());
+        $data['slug'] = Str::slug($data['title'], '-');
+        $data['content'] = (object)json_decode($data['content']);
+
+        $article->fill($data);
+
+        $article->save();
+
+        return redirect()->route('articles');
     }
 }
