@@ -43,7 +43,7 @@ class ArticleController extends Controller
 
         $data = array_merge($request->validated(), $request->all());
         $data['slug'] = Str::slug($data['title'], '-');
-        $data['content'] = (object)json_decode($data['content'])->content;
+        $data['content'] = (object)json_decode($data['content']);
 
         $article = Article::create($data);
 
