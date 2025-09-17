@@ -40,16 +40,6 @@ class ArticleController extends Controller
             'defaultStatus' => Status::draft()
         ]);
     }
-
-    public function edit(Article $article)
-    {
-        return Inertia::render('articles/edit', [
-            'article' => $article,
-            'statuses' => Status::cases(),
-            'defaultStatus' => Status::draft()
-        ]);
-    }
-
     public function store(ArticleRequest $request)
     {
 
@@ -60,6 +50,15 @@ class ArticleController extends Controller
         $article = Article::create($data);
 
         return redirect()->route('articles.create');
+    }
+
+    public function edit(Article $article)
+    {
+        return Inertia::render('articles/edit', [
+            'article' => $article,
+            'statuses' => Status::cases(),
+            'defaultStatus' => Status::draft()
+        ]);
     }
 
     public function update(ArticleRequest $request, Article $article)
@@ -75,4 +74,5 @@ class ArticleController extends Controller
 
         return redirect()->route('articles');
     }
+
 }
