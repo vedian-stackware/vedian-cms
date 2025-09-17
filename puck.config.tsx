@@ -51,7 +51,7 @@ export const config: Config<Props> = {
         },
         CallToAction: {
             render:() => (
-                <div className="bg-gray-900">
+                <div className="bg-violet-500">
                     <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
                         <h2 className="max-w-2xl text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">Boost your productivity. Start using our app today.</h2>
                         <div className="mt-10 flex items-center gap-x-6">
