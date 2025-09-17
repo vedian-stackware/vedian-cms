@@ -1,68 +1,58 @@
 // puck.config.tsx
 import { Config, DropZone } from '@measured/puck';
+import { JSX } from 'react';
 
 type Props = {
-    HeadingBlock: { title: string };
-    Grid: { content: [] }; // No props needed for the grid itself
-    Card: {
-        title: string;
-        description: string;
-        padding: number;
-    };
+    pageTitle: { title: string, variant: string, tag: string };
+    // Grid: { content: [] }; // No props needed for the grid itself
+    // Card: {
+    //     title: string;
+    //     description: string;
+    //     padding: number;
+    // };
 };
 
 export const config: Config<Props> = {
     components: {
-        HeadingBlock: {
+        pageTitle: {
             fields: {
                 title: {
                     type: 'text'
+                },
+                variant: {
+                    type: 'select',
+                    options: [
+                        {
+                            value: 'ext-2xl/7 font-bold text-white sm:truncate sm:text-3xl sm:tracking-tight',
+                            label: 'Floating'
+                        },
+                        {
+                            value: 'ext-2xl/12 font-bold text-white sm:truncate sm:text-2xl sm:tracking-tight',
+                            label: 'Outlined'
+                        }
+                    ]
+                },
+                tag: {
+                    type: 'select',
+                    options: [
+                        { value: 'h1', label: 'Heading 1' },
+                        { value: 'h2', label: 'Heading 2' },
+                        { value: 'h3', label: 'Heading 3' },
+                        { value: 'h4', label: 'Heading 4' },
+                        { value: 'h5', label: 'Heading 5' },
+                        { value: 'h6', label: 'Heading 6' }
+                    ]
                 }
+
             },
-            render: ({ title }) => (
-                // Replace the inline styles to make the text bigger and bold
-                <div className="text-4xl font-bold p-8">
-                    <h1>{title}</h1>
-                </div>
-            )
-        },
-        Grid: {
-            fields: {
-                content: {
-                    type: 'slot'
-                }
-            },
-            render: ({ content: Content }) => (
-                <Content
-                    style={{
-                        // Use CSS grid in this slot
-                        display: 'grid',
-                        gridTemplateColumns: '2fr 1fr',
-                        gap: 16
-                    }}
-                />
-            )
-        },
-        Card: {
-            // Add the fields for the title, description and padding
-            fields: {
-                title: { type: 'text' },
-                description: { type: 'textarea' },
-                padding: { type: 'number', min: 4, max: 64 }
-            },
-            // Add default values for each field
-            defaultProps: {
-                title: 'Topic Title',
-                description: 'Topic description...',
-                padding: 16
-            },
-            render: ({ title, description, padding }) => {
-                // Render the card using the values from its fields
+            render: ({ title, variant, tag }) => {
+                const Tag = tag as keyof JSX.IntrinsicElements ?? 'h1';
+
                 return (
-                    <article style={{ padding }}>
-                        <h2>{title}</h2>
-                        <p>{description}</p>
-                    </article>
+                    // Replace the inline styles to make the text bigger and bold
+                    <div className="min-w-0 flex-1">
+                        <Tag className={variant}>{title}</Tag>
+                    </div>
                 );
             }
         }
