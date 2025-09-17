@@ -27,10 +27,12 @@ class HomepageController extends Controller
             return response('', 404);
         }
 
+        $data = $article->content;
+
         return Inertia::render('home', [
             'id' => $article->id,
             'article' => $article,
-            'data' => ['content' => $article->content]
+            'data' => $data
         ]);
     }
 }
