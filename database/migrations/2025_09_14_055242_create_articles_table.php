@@ -1,5 +1,6 @@
 <?php
 
+use App\Enumerations\ContentType;
 use App\Enumerations\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,7 +16,7 @@ return new class extends Migration {
             $table->string('title');
             $table->string('slug')->unique(); // for URL
             $table->json('content')->nullable();
-            $table->string('type')->default('page'); // page, blog, comment, topic
+            $table->enum('type', ContentType::values())->default(ContentType::page()); // page, blog, comment, topic
 
             // Relations
             $table->foreignId('author_id')->constrained('users')->onDelete('cascade');
@@ -23,12 +24,12 @@ return new class extends Migration {
 
             // Page metadata
             $table->enum('status', Status::values())->default(Status::draft()); // draft, published, archived
-            $table->string('template')->nullable(); // blade template or layout
-            $table->string('featured_image')->nullable();
-
-            // SEO helpers (basic, detailed ones go in page_meta)
-            $table->string('excerpt')->nullable();
-            $table->string('slug_override')->nullable();
+//            $table->string('template')->nullable(); // blade template or layout
+//            $table->string('featured_image')->nullable();
+//
+//            // SEO helpers (basic, detailed ones go in page_meta)
+//            $table->string('excerpt')->nullable();
+//            $table->string('slug_override')->nullable();
 
             // Timestamps
             $table->timestamp('published_at')->nullable();
