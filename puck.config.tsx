@@ -3,7 +3,7 @@ import { Config, DropZone } from '@measured/puck';
 
 type Props = {
     HeadingBlock: { title: string };
-    Grid: {}; // No props needed for the grid itself
+    Grid: { content: [] }; // No props needed for the grid itself
     Card: {
         title: string;
         description: string;
@@ -27,12 +27,21 @@ export const config: Config<Props> = {
             )
         },
         Grid: {
-            render: () => {
-                return (
-                    // Replace the inline styles with Tailwind's equivalent
-                    <DropZone zone="my-grid" className="grid grid-cols-3 gap-4 p-4" />
-                );
-            }
+            fields: {
+                content: {
+                    type: 'slot'
+                }
+            },
+            render: ({ content: Content }) => (
+                <Content
+                    style={{
+                        // Use CSS grid in this slot
+                        display: 'grid',
+                        gridTemplateColumns: '2fr 1fr',
+                        gap: 16
+                    }}
+                />
+            )
         },
         Card: {
             // Add the fields for the title, description and padding

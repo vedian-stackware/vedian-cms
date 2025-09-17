@@ -13,8 +13,10 @@ import { Button } from '@/components/ui/button';
 import { LoaderCircle } from 'lucide-react';
 import { Select, SelectItem, SelectTrigger, SelectContent, SelectValue } from '@/components/ui/select';
 import { Puck } from '@measured/puck';
-import {config} from '../../../../puck.config'
-import "@measured/puck/puck.css";
+import { config } from '../../../../puck.config';
+import '@measured/puck/puck.css';
+import { router } from '@inertiajs/react';
+
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Articles',
@@ -25,23 +27,34 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: create().url
     }
 ];
-// Provide an initial page to load into the editor (empty for new pages)
-const initialData = {};
 
-// Save the page when the user clicks on Publish
-const save = (data: any) => {
-    console.log(data); // Replace this with a call to your backend
-};
+const initialData = { root: { props: {} } };
+
 
 export default function Create() {
     const { auth } = usePage<SharedData>().props;
+    const save = (puckData: any, e?: React.FormEvent) => {
+        if (e) e.preventDefault();
 
-    const data = {};
+        router.post(ArticleController.store().url, {
+            title: puckData.root?.props?.title ?? '',
+            content: JSON.stringify(puckData),
+            author_id: auth.user.id,
+            status: 'draft'}, {
+            preserveState: false,
+            preserveScroll: true, // optional
+        })
+    };
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Article create" />
             <ArticlesLayout>
-                <Puck config={config} data={initialData} onPublish={save} />
+                    <Puck
+                        config={config}
+                        data={initialData}
+                        onPublish={save}
+                    />
             </ArticlesLayout>
 
         </AppLayout>
