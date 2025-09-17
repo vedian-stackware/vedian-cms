@@ -3,13 +3,8 @@ import { Config, DropZone } from '@measured/puck';
 import { JSX } from 'react';
 
 type Props = {
-    pageTitle: { title: string, variant: string, tag: string };
-    // Grid: { content: [] }; // No props needed for the grid itself
-    // Card: {
-    //     title: string;
-    //     description: string;
-    //     padding: number;
-    // };
+    pageTitle: { title: string, tag: string };
+    CallToAction: { callToAction: string };
 };
 
 export const config: Config<Props> = {
@@ -18,19 +13,6 @@ export const config: Config<Props> = {
             fields: {
                 title: {
                     type: 'text'
-                },
-                variant: {
-                    type: 'select',
-                    options: [
-                        {
-                            value: 'ext-2xl/7 font-bold text-white sm:truncate sm:text-3xl sm:tracking-tight',
-                            label: 'Floating'
-                        },
-                        {
-                            value: 'ext-2xl/12 font-bold text-white sm:truncate sm:text-2xl sm:tracking-tight',
-                            label: 'Outlined'
-                        }
-                    ]
                 },
                 tag: {
                     type: 'select',
@@ -45,16 +27,40 @@ export const config: Config<Props> = {
                 }
 
             },
-            render: ({ title, variant, tag }) => {
+            render: ({ title, tag }) => {
                 const Tag = tag as keyof JSX.IntrinsicElements ?? 'h1';
+                const cn = tag as keyof JSX.IntrinsicElements;
+                const classNames: Record<string, string> = {
+                    h1: 'text-3xl',
+                    h2: 'text-2xl',
+                    h3: 'text-xl',
+                    h4: 'text-lg',
+                    h5: 'text-md',
+                    h6: 'text-xs'
+                };
 
                 return (
                     // Replace the inline styles to make the text bigger and bold
-                    <div className="min-w-0 flex-1">
-                        <Tag className={variant}>{title}</Tag>
+                    <div className="md:flex md:items-center md:justify-between">
+                        <div className="min-w-0 flex-1">
+                            <Tag className={classNames[tag] ?? classNames.h1}>{title}</Tag>
+                        </div>
                     </div>
                 );
             }
+        },
+        CallToAction: {
+            render:() => (
+                <div className="bg-gray-900">
+                    <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
+                        <h2 className="max-w-2xl text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">Boost your productivity. Start using our app today.</h2>
+                        <div className="mt-10 flex items-center gap-x-6">
+                            <a href="#" className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Get started</a>
+                            <a href="#" className="text-sm/6 font-semibold text-gray-300 hover:text-white">Learn more <span aria-hidden="true">→</span></a>
+                        </div>
+                    </div>
+                </div>
+            )
         }
     }
 };

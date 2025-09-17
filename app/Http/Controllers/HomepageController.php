@@ -19,7 +19,7 @@ class HomepageController extends Controller
     public function index(?string $slug = null)
     {
         if ($slug !== null)
-            $article = Article::findBySlug('asdasda-asd-2345234234');
+            $article = Article::findBySlug($slug);
         else
             $article = Article::all()->last();
 
