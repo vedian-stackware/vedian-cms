@@ -19,7 +19,7 @@ class MenuController extends Controller
     public function index()
     {
         return Inertia::render('menus', [
-            'articles' => Article::linkables()
+            'menus' => Article::linkables()
         ]);
     }
 
@@ -51,5 +51,28 @@ class MenuController extends Controller
         $article = Article::create($data);
 
         return redirect()->route('menus.create');
+    }
+
+    public function edit(Article $article)
+    {
+        return Inertia::render('menus/edit', [
+            'article' => $article,
+            'statuses' => Status::cases(),
+            'defaultStatus' => Status::draft()
+        ]);
+    }
+
+    public function update(ArticleRequest $request, Article $article)
+    {
+
+        $data = array_merge($request->validated(), $request->all());
+        $data['slug'] = Str::slug($data['title'], '-');
+        $data['content'] = (object)json_decode($data['content']);
+
+        $article->fill($data);
+
+        $article->save();
+
+        return redirect()->route('menus');
     }
 }
