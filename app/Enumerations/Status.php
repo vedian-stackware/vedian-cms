@@ -8,6 +8,7 @@ enum Status: string
     case PUBLISHED = 'published';
     case ARCHIVED = 'archived';
     case DELETED = 'deleted';
+    case ALL = 'all';
 
     // Returns all possible enum values
     public static function values(): array

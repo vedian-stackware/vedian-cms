@@ -16,10 +16,17 @@ use function response;
 
 class ArticleController extends Controller
 {
-    public function index()
+    public function index(?string $status = 'published')
     {
+        $status = Status::tryFrom($status);
+
+        if (!$status instanceof \App\Enumerations\Status) {
+            return redirect(route('articles'));
+        }
+//        dd($status);
+
         return Inertia::render('articles', [
-            'articles' => Article::linkables()
+            'articles' => Article::linkables($status)
         ]);
     }
 
@@ -40,6 +47,7 @@ class ArticleController extends Controller
             'defaultStatus' => Status::draft()
         ]);
     }
+
     public function store(ArticleRequest $request)
     {
 

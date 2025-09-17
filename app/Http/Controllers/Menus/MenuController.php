@@ -19,7 +19,7 @@ class MenuController extends Controller
     public function index()
     {
         return Inertia::render('menus', [
-            'menus' => Article::linkables()
+            'menus' => Article::linkables(Status::PUBLISHED)
         ]);
     }
 

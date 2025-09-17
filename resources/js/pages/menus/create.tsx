@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import { LoaderCircle } from 'lucide-react';
 import { Select, SelectItem, SelectTrigger, SelectContent, SelectValue } from '@/components/ui/select';
 import { Puck } from '@measured/puck';
-import { config } from '../../../../puck.config';
+import { config } from '@/puck.config';
 import '@measured/puck/puck.css';
 import { router } from '@inertiajs/react';
 import MenusLayout from '@/layouts/menus/layout';
@@ -42,10 +42,11 @@ export default function Create() {
             title: puckData.root?.props?.title ?? '',
             content: JSON.stringify(puckData),
             author_id: auth.user.id,
-            status: 'draft'}, {
+            status: 'draft'
+        }, {
             preserveState: false,
-            preserveScroll: true, // optional
-        })
+            preserveScroll: true // optional
+        });
     };
 
     return (

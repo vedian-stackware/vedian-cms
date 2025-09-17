@@ -49,6 +49,14 @@ export const config: Config<Props> = {
                     { value: 'archived', label: 'Archive' },
                     { value: 'deleted', label: 'Trash' }
                 ]
+            },
+            type: {
+                type: 'select', options: [
+                    { value: 'page', label: 'Page' },
+                    { value: 'article', label: 'Article' },
+                    { value: 'media', label: 'Media' },
+                    { value: 'video', label: 'Video' }
+                ]
             }
         },
         defaultProps: {

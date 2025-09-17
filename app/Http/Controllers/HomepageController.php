@@ -16,23 +16,27 @@ use function response;
 
 class HomepageController extends Controller
 {
-    public function index(?string $slug = null)
+    public function index(?string $slug = '')
     {
-        if ($slug !== null)
-            $article = Article::findBySlug($slug);
+        $slug = Str::slug($slug, '-');
+
+        // TODO: This should be retrieved from settings
+        if (empty($slug))
+            $article = Article::first();
         else
-            $article = Article::all()->last();
+            $article = Article::findBySlug($slug);
 
-        if (!$article instanceof Article) {
-            return response('', 404);
+        if (
+            !$article instanceof Article
+        ) {
+            return redirect(route('home'));
+
         }
-
-        $data = $article->content;
 
         return Inertia::render('home', [
             'id' => $article->id,
             'article' => $article,
-            'data' => $data
+            'data' => $article->content
         ]);
     }
 }

@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import { LoaderCircle } from 'lucide-react';
 import { Select, SelectItem, SelectTrigger, SelectContent, SelectValue } from '@/components/ui/select';
 import { Puck } from '@measured/puck';
-import { config } from '../../../../puck.config';
+import { config } from '@/puck.config';
 import '@measured/puck/puck.css';
 import { router } from '@inertiajs/react';
 
@@ -35,13 +35,13 @@ export default function Create() {
     const { auth } = usePage<SharedData>().props;
     const save = (puckData: any, e?: React.FormEvent) => {
         if (e) e.preventDefault();
-        console.log(puckData);
 
         router.post(ArticleController.store().url, {
             title: puckData.root?.props?.title ?? '',
             content: JSON.stringify(puckData),
             author_id: auth.user.id,
-            status: puckData.root?.props?.status ?? 'draft'
+            status: puckData.root?.props?.status ?? 'draft',
+            type: puckData.root?.props?.type ?? 'page',
         }, {
             preserveState: false,
             preserveScroll: true // optional

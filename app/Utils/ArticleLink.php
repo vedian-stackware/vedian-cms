@@ -6,6 +6,7 @@ use App\Models\Article;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use App\Enumerations\Status;
+use App\Enumerations\ContentType;
 
 class ArticleLink
 {
@@ -15,6 +16,7 @@ class ArticleLink
     protected string $slug;
     protected string $href;
     protected Status $status;
+    protected ContentType $type;
     protected Article $model;
 
     public function __construct(Article $item)
@@ -24,6 +26,7 @@ class ArticleLink
         $this->slug = $item->slug;
         $this->href = $item->href;
         $this->status = $item->status;
+        $this->type = $item->type;
         $this->model = $item;
     }
 
@@ -37,9 +40,15 @@ class ArticleLink
         return $this->model;
     }
 
-    public static function collect()
+    public static function collect(Status $status)
     {
-        return Article::select(['id', 'title', 'slug', 'status'])
+        $articles = Article::select(['id', 'title', 'slug', 'status', 'type']);
+
+        if ($status !== Status::ALL) {
+            $articles->where('status', $status);
+        }
+
+        return $articles
             ->get()
             ->map(function (Article $article) {
                 return self::from($article);
@@ -54,6 +63,7 @@ class ArticleLink
             'slug' => $this->slug,
             'href' => $this->href,
             'status' => $this->status,
+            'type' => $this->type,
             'model' => $this->model,
         ];
     }
