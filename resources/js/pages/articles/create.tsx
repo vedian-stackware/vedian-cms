@@ -4,7 +4,7 @@ import { create, store } from '@/routes/articles';
 import { type BreadcrumbItem, type SharedData } from '@/types';
 import { Form, Head, usePage } from '@inertiajs/react';
 import { articles } from '@/routes';
-import PageEditor from '@/puck/PageEditor';
+import PageEditor from '@/editors/page.editor';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {

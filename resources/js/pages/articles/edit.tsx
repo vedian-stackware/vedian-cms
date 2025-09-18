@@ -4,7 +4,7 @@ import { create, edit, update } from '@/routes/articles';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import { articles } from '@/routes';
-import PageEditor from '@/puck/PageEditor';
+import PageEditor from '@/editors/page.editor';
 
 export default function Edit({ article }: { article: any }) {
 

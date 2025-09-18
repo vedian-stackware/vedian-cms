@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enumerations\Status;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Articles\ArticleRequest;
+use App\Http\Requests\Articles\MenuRequest;
 use App\Models\Article;
 use App\Models\User;
 use Illuminate\Support\Str;
