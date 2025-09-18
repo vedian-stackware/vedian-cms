@@ -11,9 +11,11 @@ class MenuRequest extends FormRequest
 {
     public function rules()
     {
+
         return [
             'name' => ['required'],
             'items' => ['required', 'array'],
+            'items.*.article_id' => ['required', 'exists:articles,id'],
             'items.*.title' => ['required'],
             'items.*.slug' => ['required'],
             'items.*.href' => ['required'],
