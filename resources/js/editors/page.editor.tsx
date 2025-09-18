@@ -1,6 +1,6 @@
 import { Puck } from '@measured/puck';
-import { config } from '@/puck/editor.config';
-// import '../../css/puck.css';
+import { config } from '@/editors/editor.config';
+// import '../../css/editors.css';
 import '@measured/puck/puck.css';
 import { router, usePage } from '@inertiajs/react';
 import type { RouteDefinition } from '@/wayfinder';

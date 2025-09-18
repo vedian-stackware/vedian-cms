@@ -62,18 +62,18 @@
     --puck-color-red-10: #f6eaec;
     --puck-color-red-11: #faf4f5;
     --puck-color-red-12: #fff9fa;
-    /*--puck-color-grey-01: #181818;*/
-    /*--puck-color-grey-02: #292929;*/
-    /*--puck-color-grey-03: #404040;*/
-    /*--puck-color-grey-04: #5a5a5a;*/
-    /*--puck-color-grey-05: #767676;*/
-    /*--puck-color-grey-06: #949494;*/
-    /*--puck-color-grey-07: #ababab;*/
-    /*--puck-color-grey-08: #c3c3c3;*/
-    /*--puck-color-grey-09: #dcdcdc;*/
-    /*--puck-color-grey-10: #efefef;*/
-    /*--puck-color-grey-11: #f5f5f5;*/
-    /*--puck-color-grey-12: #fafafa;*/
+    /*--editors-color-grey-01: #181818;*/
+    /*--editors-color-grey-02: #292929;*/
+    /*--editors-color-grey-03: #404040;*/
+    /*--editors-color-grey-04: #5a5a5a;*/
+    /*--editors-color-grey-05: #767676;*/
+    /*--editors-color-grey-06: #949494;*/
+    /*--editors-color-grey-07: #ababab;*/
+    /*--editors-color-grey-08: #c3c3c3;*/
+    /*--editors-color-grey-09: #dcdcdc;*/
+    /*--editors-color-grey-10: #efefef;*/
+    /*--editors-color-grey-11: #f5f5f5;*/
+    /*--editors-color-grey-12: #fafafa;*/
     --puck-color-black: #000000;
     --puck-color-white: #ffffff;
 }
@@ -146,7 +146,7 @@
 
 /* bundle/index.css */
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/ActionBar/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/ActionBar/styles.module.css/#css-module-data */
 ._ActionBar_rvadt_1 {
     align-items: center;
     cursor: default;
@@ -158,7 +158,7 @@
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     border-radius: 8px;
-    /*background: var(--puck-color-grey-01);*/
+    /*background: var(--editors-color-grey-01);*/
     color: var(--puck-color-white);
     font-family: var(--puck-font-family);
     min-height: 26px;
@@ -230,7 +230,7 @@
     margin: 0;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/AutoField/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/AutoField/styles.module.css/#css-module-data */
 ._InputWrapper_bsxfo_1 + ._InputWrapper_bsxfo_1 {
     margin-top: 12px;
 }
@@ -253,7 +253,7 @@
     margin-inline-start: auto;
 }
 ._Input-input_bsxfo_26 {
-    /** background: var(--puck-color-white); */
+    /** background: var(--editors-color-white); */
     border-width: 1px;
     border-style: solid;
     border-color: var(--puck-color-grey-09);
@@ -385,7 +385,7 @@ textarea._Input-input_bsxfo_26 {
     margin-bottom: -4px;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/AutoField/fields/ArrayField/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/AutoField/fields/ArrayField/styles.module.css/#css-module-data */
 ._ArrayField_14u8o_5 {
     display: flex;
     flex-direction: column;
@@ -468,7 +468,7 @@ textarea._Input-input_bsxfo_26 {
     border-top-right-radius: 0;
 }
 ._ArrayFieldItem-summary_14u8o_97 {
-    /** background: var(--puck-color-white); */
+    /** background: var(--editors-color-white); */
     color: var(--puck-color-grey-04);
     cursor: pointer;
     display: flex;
@@ -515,7 +515,7 @@ textarea._Input-input_bsxfo_26 {
     transition: none;
 }
 ._ArrayFieldItem-body_14u8o_166 {
-    /** background: var(--puck-color-white); */
+    /** background: var(--editors-color-white); */
     display: none;
 }
 ._ArrayFieldItem--isExpanded_14u8o_82 > ._ArrayFieldItem-body_14u8o_166 {
@@ -544,7 +544,7 @@ textarea._Input-input_bsxfo_26 {
     opacity: 1;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/IconButton/IconButton.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/IconButton/IconButton.module.css/#css-module-data */
 ._IconButton_swpni_1 {
     align-items: center;
     background: transparent;
@@ -586,7 +586,7 @@ textarea._Input-input_bsxfo_26 {
     color: var(--puck-color-grey-07);
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/Loader/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/Loader/styles.module.css/#css-module-data */
 @keyframes _loader-animation_nacdm_1 {
     0% {
         transform: rotate(0deg) scale(1);
@@ -608,7 +608,7 @@ textarea._Input-input_bsxfo_26 {
     animation-fill-mode: both;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/DragIcon/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/DragIcon/styles.module.css/#css-module-data */
 ._DragIcon_17p8x_1 {
     color: var(--puck-color-grey-05);
     cursor: grab;
@@ -638,7 +638,7 @@ textarea._Input-input_bsxfo_26 {
     transition: none !important;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/ExternalInput/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/ExternalInput/styles.module.css/#css-module-data */
 ._ExternalInput-actions_91ls0_1 {
     display: flex;
 }
@@ -836,7 +836,7 @@ textarea._Input-input_bsxfo_26 {
 }
 ._ExternalInputModal-search_91ls0_227 {
     display: flex;
-    /** background: var(--puck-color-white); */
+    /** background: var(--editors-color-white); */
     border-width: 1px;
     border-style: solid;
     border-color: var(--puck-color-grey-09);
@@ -889,7 +889,7 @@ textarea._Input-input_bsxfo_26 {
 ._ExternalInputModal-searchInput_91ls0_299 {
     border: none;
     border-radius: 4px;
-    /** background: var(--puck-color-white); */
+    /** background: var(--editors-color-white); */
     font-family: inherit;
     font-size: 14px;
     padding: 12px 15px;
@@ -930,7 +930,7 @@ textarea._Input-input_bsxfo_26 {
     display: block;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/Modal/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/Modal/styles.module.css/#css-module-data */
 ._Modal_ikbaj_1 {
     background: color-mix(in srgb, var(--puck-color-black) 75%, transparent);
     display: none;
@@ -952,13 +952,13 @@ textarea._Input-input_bsxfo_26 {
     max-width: 1024px;
     border-radius: 8px;
     overflow: hidden;
-    /** background: var(--puck-color-white); */
+    /** background: var(--editors-color-white); */
     display: flex;
     flex-direction: column;
     max-height: 90dvh;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/Heading/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/Heading/styles.module.css/#css-module-data */
 ._Heading_qxrry_1 {
     display: block;
     color: var(--puck-color-white);
@@ -995,7 +995,7 @@ textarea._Input-input_bsxfo_26 {
     font-size: var(--puck-font-size-xs);
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/Button/Button.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/Button/Button.module.css/#css-module-data */
 ._Button_10byl_1 {
     appearance: none;
     background: none;
@@ -1084,11 +1084,11 @@ textarea._Input-input_bsxfo_26 {
     padding-inline-start: 8px;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/AutoField/fields/ObjectField/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/AutoField/fields/ObjectField/styles.module.css/#css-module-data */
 ._ObjectField_1ua3y_5 {
     display: flex;
     flex-direction: column;
-    /*background-color: var(--puck-color-white);*/
+    /*background-color: var(--editors-color-white);*/
     border: 1px solid var(--puck-color-grey-09);
     border-radius: 4px;
 }
@@ -1099,7 +1099,7 @@ textarea._Input-input_bsxfo_26 {
     padding: 16px 15px;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/Drawer/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/Drawer/styles.module.css/#css-module-data */
 ._Drawer_pl7z0_1 {
     display: flex;
     flex-direction: column;
@@ -1119,7 +1119,7 @@ textarea._Input-input_bsxfo_26 {
     z-index: -1;
 }
 ._DrawerItem-draggable_pl7z0_22 {
-    /** background: var(--puck-color-white); */
+    /** background: var(--editors-color-white); */
     cursor: grab;
     padding: 12px;
     display: flex;
@@ -1156,7 +1156,7 @@ textarea._Input-input_bsxfo_26 {
     white-space: nowrap;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/DraggableComponent/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/DraggableComponent/styles.module.css/#css-module-data */
 ._DraggableComponent_1vaqy_1 {
     position: absolute;
     pointer-events: none;
@@ -1182,7 +1182,7 @@ textarea._Input-input_bsxfo_26 {
     outline: 1px solid var(--puck-color-azure-05);
 }
 ._DraggableComponent-loadingOverlay_1vaqy_34 {
-    /** background: var(--puck-color-white); */
+    /** background: var(--editors-color-white); */
     color: var(--puck-color-grey-03);
     border-radius: 4px;
     display: flex;
@@ -1263,7 +1263,7 @@ textarea._Input-input_bsxfo_26 {
     outline-offset: -2px !important;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/DropZone/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/DropZone/styles.module.css/#css-module-data */
 ._DropZone_1i2sv_1 {
     --resize-animation-ms: 150ms;
     position: relative;
@@ -1330,7 +1330,7 @@ body:has(._DropZone--isAnimating_1i2sv_68:empty) [data-puck-overlay] {
     outline-offset: 2px;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/InlineTextField/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/InlineTextField/styles.module.css/#css-module-data */
 ._InlineTextField_1xph6_1 {
     cursor: text;
     display: inline-block;
@@ -1344,7 +1344,7 @@ body:has(._DropZone--isAnimating_1i2sv_68:empty) [data-puck-overlay] {
     display: none;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/SidebarSection/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/SidebarSection/styles.module.css/#css-module-data */
 ._SidebarSection_8boj8_1 {
     display: flex;
     position: relative;
@@ -1355,7 +1355,7 @@ body:has(._DropZone--isAnimating_1i2sv_68:empty) [data-puck-overlay] {
     flex-grow: 1;
 }
 ._SidebarSection-title_8boj8_12 {
-    /** background: var(--puck-color-white); */
+    /** background: var(--editors-color-white); */
     padding: 16px;
     border-bottom: 1px solid var(--puck-color-grey-09);
     border-top: 1px solid var(--puck-color-grey-09);
@@ -1416,7 +1416,7 @@ body:has(._DropZone--isAnimating_1i2sv_68:empty) [data-puck-overlay] {
     padding-inline-end: 16px;
 }
 ._SidebarSection-loadingOverlay_8boj8_86 {
-    /** background: var(--puck-color-white); */
+    /** background: var(--editors-color-white); */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1430,7 +1430,7 @@ body:has(._DropZone--isAnimating_1i2sv_68:empty) [data-puck-overlay] {
     opacity: 0.8;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/Puck/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/Puck/styles.module.css/#css-module-data */
 ._Puck_1yxlw_19 {
     --puck-space-px: 16px;
     font-family: var(--puck-font-family);
@@ -1506,7 +1506,7 @@ body:has(._DropZone--isAnimating_1i2sv_68:empty) [data-puck-overlay] {
     }
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/Puck/components/Fields/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/Puck/components/Fields/styles.module.css/#css-module-data */
 ._PuckFields_10bh7_1 {
     position: relative;
     font-family: var(--puck-font-family);
@@ -1515,7 +1515,7 @@ body:has(._DropZone--isAnimating_1i2sv_68:empty) [data-puck-overlay] {
     min-height: 48px;
 }
 ._PuckFields-loadingOverlay_10bh7_10 {
-    /** background: var(--puck-color-white); */
+    /** background: var(--editors-color-white); */
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
@@ -1548,7 +1548,7 @@ body:has(._DropZone--isAnimating_1i2sv_68:empty) [data-puck-overlay] {
     margin-top: 8px;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/ComponentList/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/ComponentList/styles.module.css/#css-module-data */
 ._ComponentList_1rrlt_1 {
     max-width: 100%;
 }
@@ -1597,7 +1597,7 @@ body:has(._DropZone--isAnimating_1i2sv_68:empty) [data-puck-overlay] {
     margin-inline-start: auto;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/Puck/components/Preview/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/Puck/components/Preview/styles.module.css/#css-module-data */
 ._PuckPreview_z2rgu_1 {
     position: relative;
     height: 100%;
@@ -1608,7 +1608,7 @@ body:has(._DropZone--isAnimating_1i2sv_68:empty) [data-puck-overlay] {
     width: 100%;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/LayerTree/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/LayerTree/styles.module.css/#css-module-data */
 ._LayerTree_7rx04_1 {
     color: var(--puck-color-grey-03);
     font-family: var(--puck-font-family);
@@ -1711,7 +1711,7 @@ body:has(._DropZone--isAnimating_1i2sv_68:empty) [data-puck-overlay] {
     margin-top: 4px;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/ViewportControls/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/ViewportControls/styles.module.css/#css-module-data */
 ._ViewportControls_gejzr_1 {
     display: flex;
     background: var(--puck-color-grey-11);
@@ -1748,7 +1748,7 @@ body:has(._DropZone--isAnimating_1i2sv_68:empty) [data-puck-overlay] {
     color: var(--puck-color-azure-04);
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/Puck/components/Canvas/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/Puck/components/Canvas/styles.module.css/#css-module-data */
 ._PuckCanvas_18jay_1 {
     background: var(--puck-color-grey-11);
     display: flex;
@@ -1818,7 +1818,7 @@ body:has(._DropZone--isAnimating_1i2sv_68:empty) [data-puck-overlay] {
     transition: none;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/MenuBar/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/MenuBar/styles.module.css/#css-module-data */
 ._MenuBar_8pf8c_1 {
     background-color: var(--puck-color-white);
     border-bottom: 1px solid var(--puck-color-grey-09);
@@ -1862,9 +1862,9 @@ body:has(._DropZone--isAnimating_1i2sv_68:empty) [data-puck-overlay] {
     display: flex;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/Puck/components/Header/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/Puck/components/Header/styles.module.css/#css-module-data */
 ._PuckHeader_15xnq_1 {
-    /** background: var(--puck-color-white); */
+    /** background: var(--editors-color-white); */
     border-bottom: 1px solid var(--puck-color-grey-09);
     color: var(--puck-color-white);
     grid-area: header;
@@ -1917,7 +1917,7 @@ body:has(._DropZone--isAnimating_1i2sv_68:empty) [data-puck-overlay] {
     }
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/Puck/components/ResizeHandle/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/Puck/components/ResizeHandle/styles.module.css/#css-module-data */
 @media (min-width: 766px) {
     ._ResizeHandle_144bf_2 {
         position: absolute;
@@ -1950,7 +1950,7 @@ body:has(._DropZone--isAnimating_1i2sv_68:empty) [data-puck-overlay] {
     cursor: col-resize;
 }
 
-/* css-module:/home/runner/work/puck/puck/packages/core/components/Puck/components/Sidebar/styles.module.css/#css-module-data */
+/* css-module:/home/runner/work/editors/editors/packages/core/components/Puck/components/Sidebar/styles.module.css/#css-module-data */
 ._Sidebar_1xksb_1 {
     position: relative;
     display: flex;
@@ -1963,7 +1963,7 @@ body:has(._DropZone--isAnimating_1i2sv_68:empty) [data-puck-overlay] {
     grid-area: left;
 }
 ._Sidebar--right_1xksb_14 {
-    /** background: var(--puck-color-white); */
+    /** background: var(--editors-color-white); */
     border-inline-start: 1px solid var(--puck-color-grey-09);
     grid-area: right;
 }

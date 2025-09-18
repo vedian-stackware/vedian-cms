@@ -50,7 +50,6 @@ class ArticleController extends Controller
 
     public function store(ArticleRequest $request)
     {
-        dd($request->all());
         $data = array_merge($request->validated(), $request->all());
         $data['slug'] = Str::slug($data['title'], '-');
         $data['content'] = (object)json_decode($data['content']);
