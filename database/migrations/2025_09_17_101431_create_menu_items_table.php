@@ -9,8 +9,9 @@ return new class extends Migration {
     {
         Schema::create('menu_items', function (Blueprint $table) {
             $table->id();
-            $table->string('url')->nullable();
-            $table->string('label')->nullable();
+            $table->string('title');
+            $table->string('slug');
+            $table->string('href');
             $table->string('icon')->nullable();
 //            $table->string('type')->nullable();
 
