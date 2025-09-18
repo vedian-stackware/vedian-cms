@@ -1,6 +1,7 @@
-// puck.config.tsx
+// editor.config.tsx
 import { Config, Content } from '@measured/puck';
 import { JSX } from 'react';
+import { Input } from '@/components/ui/input';
 
 type Props = {
     Headings: {
@@ -40,7 +41,7 @@ export const config: Config<Props> = {
     },
     root: {
         fields: {
-            title: { type: 'text' },
+            title: {type: 'text'},
             description: { type: 'textarea' },
             status: {
                 type: 'select', options: [
@@ -60,13 +61,13 @@ export const config: Config<Props> = {
             }
         },
         defaultProps: {
-            title: 'Hello, world',
+            title: 'Your page',
             description: 'Lorem ipsum'
         },
         render: ({ children, title, description }) => {
             return (
                 <div>
-                    {/*<h1>{title}</h1>*/}
+                    <h1 className="text-base font-semibold text-3xl">{title}</h1>
                     {/*<p>{description}</p>*/}
                     {children}
                 </div>

@@ -27,7 +27,7 @@ class HomepageController extends Controller
             $article = Article::findBySlug($slug);
 
         if (
-            !$article instanceof Article
+            !$article instanceof Article || $article->status !== Status::PUBLISHED
         ) {
             return redirect(route('home'));
 

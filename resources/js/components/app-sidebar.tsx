@@ -5,9 +5,11 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, Sid
 import { dashboard, articles, menus } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, ScanBarcodeIcon } from 'lucide-react';
 import AppLogo from './app-logo';
 import Menus from '@/routes/menus';
+import { DocumentDuplicateIcon, DocumentIcon } from '@heroicons/react/16/solid';
+import { Bars4Icon } from '@heroicons/react/24/solid';
 
 const mainNavItems: NavItem[] = [
     {
@@ -18,12 +20,12 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Articles',
         href: articles(),
-        icon: LayoutGrid,
+        icon: DocumentDuplicateIcon,
     },
     {
         title: 'Menus',
         href: menus(),
-        icon: LayoutGrid,
+        icon: Bars4Icon,
     },
 ];
 

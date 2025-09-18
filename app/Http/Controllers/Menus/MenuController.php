@@ -23,6 +23,11 @@ class MenuController extends Controller
         ]);
     }
 
+    public function pageList()
+    {
+        return response()->json(Article::linkables(Status::PUBLISHED));
+    }
+
     public function show(Article $article)
     {
         return Inertia::render('menus/show', [
@@ -35,7 +40,7 @@ class MenuController extends Controller
     public function create()
     {
         return Inertia::render('menus/create', [
-            'authors' => User::all(),
+            'pages' => Article::linkables(Status::PUBLISHED),
             'statuses' => Status::cases(),
             'defaultStatus' => Status::draft()
         ]);
