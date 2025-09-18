@@ -19,7 +19,7 @@ class MenuController extends Controller
     public function index()
     {
         return Inertia::render('menus', [
-            'menus' => Article::linkables(Status::PUBLISHED)
+            'menus' => Menu::all()
         ]);
     }
 
@@ -28,12 +28,12 @@ class MenuController extends Controller
         return response()->json(Article::linkables(Status::PUBLISHED));
     }
 
-    public function show(Article $article)
+    public function show(Menu $menu)
     {
         return Inertia::render('menus/show', [
-            'id' => $article->id,
-            'article' => $article,
-            'data' => ['content' => $article->content]
+            'id' => $menu->id,
+            'menu' => $menu,
+//            'data' => ['content' => $menu->content]
         ]);
     }
 
@@ -48,7 +48,6 @@ class MenuController extends Controller
 
     public function store(MenuRequest $request)
     {
-//        dd($request->validated());
         $menu = Menu::with('menu_items')->create($request->validated());
 
         $menuItems = $menu->menu_items()->createMany($request->validated()['items']);
@@ -57,25 +56,26 @@ class MenuController extends Controller
         return redirect()->route('menus.create');
     }
 
-    public function edit(Article $article)
+    public function edit(Menu $menu)
     {
         return Inertia::render('menus/edit', [
-            'article' => $article,
+            'pages' => Article::linkables(Status::PUBLISHED),
+            'menu' => $menu,
             'statuses' => Status::cases(),
             'defaultStatus' => Status::draft()
         ]);
     }
 
-    public function update(MenuRequest $request, Article $article)
+    public function update(MenuRequest $request, menu $menu)
     {
 
         $data = array_merge($request->validated(), $request->all());
         $data['slug'] = Str::slug($data['title'], '-');
         $data['content'] = (object)json_decode($data['content']);
 
-        $article->fill($data);
+        $menu->fill($data);
 
-        $article->save();
+        $menu->save();
 
         return redirect()->route('menus');
     }

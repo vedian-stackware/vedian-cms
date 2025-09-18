@@ -17,6 +17,8 @@ import { config } from '@/editors/editor.config';
 import '@measured/puck/puck.css';
 import { router } from '@inertiajs/react';
 import MenusLayout from '@/layouts/menus/layout';
+import NavigationEditor from '@/editors/navigation.editor';
+import { data } from '@/editors/navigation.editor';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -28,36 +30,13 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: create().url
     }
 ];
-
-const initialData = { root: { props: {} } };
-
-
-export default function Edit({ article }: { article: any }) {
-    const { auth } = usePage<SharedData>().props;
-    const data: any = article.content;
-    const save = (puckData: any, e?: React.FormEvent) => {
-        if (e) e.preventDefault();
-        console.log(puckData);
-        router.put(ArticleController.update(article.id).url, {
-            title: puckData.root?.props?.title ?? '',
-            content: JSON.stringify(puckData),
-            author_id: auth.user.id,
-            status: 'draft'
-        }, {
-            preserveState: false,
-            preserveScroll: true // optional
-        });
-    };
-
+export default function Edit({ pages, menu }: { pages:any, menu: any }) {
+    console.log(menu);
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Menu edit" />
             <MenusLayout>
-                <Puck
-                    config={config}
-                    data={data}
-                    onPublish={save}
-                />
+                <NavigationEditor pages={pages} menu={menu} />
             </MenusLayout>
 
         </AppLayout>
