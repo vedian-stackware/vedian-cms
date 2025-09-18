@@ -16,10 +16,17 @@ use function response;
 
 class ArticleController extends Controller
 {
-    public function index()
+    public function index(?string $status = 'published')
     {
+        $status = Status::tryFrom($status);
+
+        if (!$status instanceof \App\Enumerations\Status) {
+            return redirect(route('articles'));
+        }
+//        dd($status);
+
         return Inertia::render('articles', [
-            'articles' => Article::linkables()
+            'articles' => Article::linkables($status)
         ]);
     }
 
@@ -41,18 +48,8 @@ class ArticleController extends Controller
         ]);
     }
 
-    public function edit(Article $article)
-    {
-        return Inertia::render('articles/edit', [
-            'article' => $article,
-            'statuses' => Status::cases(),
-            'defaultStatus' => Status::draft()
-        ]);
-    }
-
     public function store(ArticleRequest $request)
     {
-
         $data = array_merge($request->validated(), $request->all());
         $data['slug'] = Str::slug($data['title'], '-');
         $data['content'] = (object)json_decode($data['content']);
@@ -60,6 +57,15 @@ class ArticleController extends Controller
         $article = Article::create($data);
 
         return redirect()->route('articles.create');
+    }
+
+    public function edit(Article $article)
+    {
+        return Inertia::render('articles/edit', [
+            'article' => $article,
+            'statuses' => Status::cases(),
+            'defaultStatus' => Status::draft()
+        ]);
     }
 
     public function update(ArticleRequest $request, Article $article)
@@ -75,4 +81,5 @@ class ArticleController extends Controller
 
         return redirect()->route('articles');
     }
+
 }

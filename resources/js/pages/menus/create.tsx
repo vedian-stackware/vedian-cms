@@ -1,22 +1,14 @@
-import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
-import ArticlesLayout from '@/layouts/articles/layout';
-import { create } from '@/routes/menus';
-import { type BreadcrumbItem, type SharedData } from '@/types';
-import { Form, Head, usePage, useForm } from '@inertiajs/react';
-import { menus } from '@/routes';
-import { Input } from '@/components/ui/input';
-import InputError from '@/components/input-error';
-import { Label } from '@/components/ui/label';
-import ArticleController from '@/actions/App/Http/Controllers/Articles/ArticleController';
-import { Button } from '@/components/ui/button';
-import { LoaderCircle } from 'lucide-react';
-import { Select, SelectItem, SelectTrigger, SelectContent, SelectValue } from '@/components/ui/select';
-import { Puck } from '@measured/puck';
-import { config } from '../../../../puck.config';
-import '@measured/puck/puck.css';
-import { router } from '@inertiajs/react';
 import MenusLayout from '@/layouts/menus/layout';
+import { create } from '@/routes/menus';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { type BreadcrumbItem } from '@/types';
+import { Head, Link } from '@inertiajs/react';
+import { menus } from '@/routes';
+import '@tailwindplus/elements';
+import { Button } from '@/components/ui/button';
+import { PlusIcon } from '@heroicons/react/16/solid';
+import { useEffect, useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -29,30 +21,79 @@ const breadcrumbs: BreadcrumbItem[] = [
     }
 ];
 
-const initialData = { root: { props: {} } };
+export default function Create({ pages }: { pages: any }) {
+    let selectedPage: typeof pages | null = null;
 
+    const [menuData, setMenuData] = useState<{ id: number; title: string; href: string }[]>([]);
+    const [pageListData, setPageListData] = useState<typeof pages>(pages);
 
-export default function Create() {
-    const { auth } = usePage<SharedData>().props;
-    const save = (puckData: any, e?: React.FormEvent) => {
-        if (e) e.preventDefault();
-        console.log(puckData);
+    useEffect(() => {
+        setPageListData(pages);
+    }, [pages]);
 
-        router.post(ArticleController.store().url, {
-            title: puckData.root?.props?.title ?? '',
-            content: JSON.stringify(puckData),
-            author_id: auth.user.id,
-            status: 'draft'}, {
-            preserveState: false,
-            preserveScroll: true, // optional
-        })
+    const removePageFromList = (id: number) => {
+        setPageListData((prev: typeof pages) => prev.filter((page: typeof pages) => page.id !== id));
     };
-
+    const addMenuItem = (id: number) => {
+        setMenuData((prev: typeof menuData) => {
+            if (prev.some((item: { id: number }) => item.id === id)) {
+                return prev;
+            }
+            return [...prev, selectedPage];
+        });
+    };
+    const onChangeUrlSelect = (id: string) => {
+        selectedPage = pages.find((p: any) => p.id.toString() === id);
+    };
+    const onAddMenuPage = () => {
+        if (!selectedPage) return;
+        addMenuItem(selectedPage.id);
+        removePageFromList(selectedPage.id);
+    };
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Menus create" />
             <MenusLayout>
-
+                <nav
+                    className="relative bg-gray-800/50 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10">
+                    <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+                        <div className="relative flex h-16 items-center justify-between">
+                            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                                <div className="hidden sm:ml-6 sm:block">
+                                    <div className="flex space-x-4">
+                                        {menuData.length > 0 && menuData.map((item) => (
+                                            <Link href={item.href} key={item.id}
+                                                  onClick={(e: any) => (e.preventDefault())}
+                                                  className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">
+                                                {item.title}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <div className="flex rounded-lg">
+                    <Select onValueChange={onChangeUrlSelect}>
+                        <SelectTrigger className="w-[200px] rounded-r-none">
+                            <SelectValue placeholder="Select a page" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-gray-800 text-white">
+                            {pageListData.map((p: any) => (
+                                <SelectItem key={p.id} value={p.id.toString()}>
+                                    {p.title}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                    <Button
+                        onClick={onAddMenuPage}
+                        title="123"
+                        className="size-9 shrink-0 inline-flex justify-center items-center gap-x-2 text-sm font-semibold border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none rounded-tl-none rounded-bl-none ">
+                        <PlusIcon />
+                    </Button>
+                </div>
             </MenusLayout>
 
         </AppLayout>

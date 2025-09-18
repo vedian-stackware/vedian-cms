@@ -7,7 +7,6 @@ enum ContentType: string
     case PAGE = 'page';
     case ARTICLE = 'article';
     case MEDIA = 'media';
-    case GALLERY = 'gallery';
     case VIDEO = 'video';
 
     // Returns all possible enum values

@@ -14,18 +14,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
 
-    // Articles overview page
-    Route::get('articles', [
-        ArticleController::class, 'index'
-    ])->name('articles');
-
-    require __DIR__ . '/articles.php';
 
     // Articles overview page
     Route::get('menus', [
         MenuController::class, 'index'
     ])->name('menus');
 
+
+    require __DIR__ . '/articles.php';
     require __DIR__ . '/menus.php';
 
 });

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\AsCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\HasCollection;
@@ -40,9 +41,14 @@ class Article extends Model
         return $this->belongsTo(Article::class, 'parent_id');
     }
 
+    public function scopeSlug(Builder $query, string $slug)
+    {
+        return $query->where('slug', $slug);
+    }
+
     public static function findBySlug(string $slug)
     {
-        return self::where('slug', $slug)->firstOrFail();
+        return static::slug($slug)->exists() ? static::slug($slug)->first() : null;
     }
 
     public function getHrefAttribute()
@@ -50,9 +56,9 @@ class Article extends Model
         return url($this->slug);
     }
 
-    public static function linkables()
+    public static function linkables(?\App\Enumerations\Status $status = null)
     {
-        return ArticleLink::collect();
+        return ArticleLink::collect($status);
     }
 
     public function linkable()

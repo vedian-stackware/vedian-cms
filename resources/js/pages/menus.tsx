@@ -20,40 +20,40 @@ const breadcrumbs: BreadcrumbItem[] = [
     }
 ];
 
-export default function Articles({ articles }: { articles: any }) {
+export default function Menus() {
 
-    console.log(articles);
+    // console.log(articles);
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Menus" />
             <MenusLayout>
-                <table>
-                    <thead>
-                    <tr>
-                        <td>Title</td>
-                        <td>slug</td>
-                        <td>href</td>
-                        <td>status</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {articles.map((article: any) => (
-                        <tr key={article.id}>
-                            <td>{article.title}</td>
-                            <td>{article.slug}</td>
-                            <td>{article.href}</td>
-                            <td>{article.status}</td>
-                            <td><a href={show(article.id).url}>
-                                asda</a></td>
-                        </tr>
-                        // <a key={article.id} href={article.href}>
-                        //     {article.title} | {article.href} | {article.status}
-                        //     <br />
-                        // </a>
-                    ))}
-                    </tbody>
-                </table>
+                {/*<table>*/}
+                {/*    <thead>*/}
+                {/*    <tr>*/}
+                {/*        <td>Title</td>*/}
+                {/*        <td>slug</td>*/}
+                {/*        <td>href</td>*/}
+                {/*        <td>status</td>*/}
+                {/*    </tr>*/}
+                {/*    </thead>*/}
+                {/*    <tbody>*/}
+                {/*    {articles.map((article: any) => (*/}
+                {/*        <tr key={article.id}>*/}
+                {/*            <td>{article.title}</td>*/}
+                {/*            <td>{article.slug}</td>*/}
+                {/*            <td>{article.href}</td>*/}
+                {/*            <td>{article.status}</td>*/}
+                {/*            <td><a href={show(article.id).url}>*/}
+                {/*                asda</a></td>*/}
+                {/*        </tr>*/}
+                {/*        // <a key={article.id} href={article.href}>*/}
+                {/*        //     {article.title} | {article.href} | {article.status}*/}
+                {/*        //     <br />*/}
+                {/*        // </a>*/}
+                {/*    ))}*/}
+                {/*    </tbody>*/}
+                {/*</table>*/}
             </MenusLayout>
 
         </AppLayout>
