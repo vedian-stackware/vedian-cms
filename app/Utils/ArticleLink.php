@@ -58,7 +58,7 @@ class ArticleLink
     public function toArray()
     {
         return (object)[
-            'id' => $this->id,
+            'article_id' => $this->id,
             'title' => $this->title,
             'slug' => $this->slug,
             'href' => $this->href,

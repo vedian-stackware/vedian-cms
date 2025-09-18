@@ -48,10 +48,12 @@ class MenuController extends Controller
 
     public function store(MenuRequest $request)
     {
+//        dd($request->validated());
         $menu = Menu::with('menu_items')->create($request->validated());
-        $menuItems = $menu->menu_items()->createMany($request->validated()['items']);
 
+        $menuItems = $menu->menu_items()->createMany($request->validated()['items']);
         dd($menu->menu_items->toArray(), $menu->toArray());
+
         return redirect()->route('menus.create');
     }
 

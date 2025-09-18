@@ -8,32 +8,32 @@ export let data: any[] = [];
 export default function NavigationEditor({ pages }: { pages: any }) {
     let selectedPage: typeof pages | null = null;
 
-    const [menuData, setMenuData] = useState<{ id: number; title: string; href: string }[]>([]);
+    const [menuData, setMenuData] = useState<{ article_id: number; title: string; href: string }[]>([]);
     const [pageListData, setPageListData] = useState<typeof pages>(pages);
 
     useEffect(() => {
         setPageListData(pages);
     }, [pages]);
 
-    const removePageFromList = (id: number) => {
-        setPageListData((prev: typeof pages) => prev.filter((page: typeof pages) => page.id !== id));
+    const removePageFromList = (article_id: number) => {
+        setPageListData((prev: typeof pages) => prev.filter((page: typeof pages) => page.article_id !== article_id));
     };
-    const addMenuItem = (id: number) => {
+    const addMenuItem = (article_id: number) => {
         setMenuData((prev: typeof menuData) => {
-            if (prev.some((item: { id: number }) => item.id === id)) {
+            if (prev.some((item: { article_id: number }) => item.article_id === article_id)) {
                 return prev;
             }
             data.push(selectedPage);
             return [...prev, selectedPage];
         });
     };
-    const onChangeUrlSelect = (id: string) => {
-        selectedPage = pages.find((p: any) => p.id.toString() === id);
+    const onChangeUrlSelect = (article_id: string) => {
+        selectedPage = pages.find((p: any) => p.article_id.toString() === article_id);
     };
     const onAddMenuPage = () => {
         if (!selectedPage) return;
-        addMenuItem(selectedPage.id);
-        removePageFromList(selectedPage.id);
+        addMenuItem(selectedPage.article_id);
+        removePageFromList(selectedPage.article_id);
     };
 
     return (
@@ -46,7 +46,7 @@ export default function NavigationEditor({ pages }: { pages: any }) {
                             <div className="hidden sm:ml-6 sm:block">
                                 <div className="flex space-x-4">
                                     {menuData.length > 0 && menuData.map((item) => (
-                                        <Link href={item.href} key={item.id}
+                                        <Link href={item.href} key={item.article_id}
                                               onClick={(e: any) => (e.preventDefault())}
                                               className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">
                                             {item.title}
@@ -65,7 +65,7 @@ export default function NavigationEditor({ pages }: { pages: any }) {
                     </SelectTrigger>
                     <SelectContent className="bg-gray-800 text-white">
                         {pageListData.map((p: any) => (
-                            <SelectItem key={p.id} value={p.id.toString()}>
+                            <SelectItem key={p.article_id} value={p.article_id.toString()}>
                                 {p.title}
                             </SelectItem>
                         ))}
