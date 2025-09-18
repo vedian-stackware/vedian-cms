@@ -5,14 +5,29 @@ import { Button } from '@/components/ui/button';
 import { PlusIcon } from '@heroicons/react/16/solid';
 
 export let data: any[] = [];
-export default function NavigationEditor({ pages }: { pages: any }) {
+export default function NavigationEditor({ pages, menu = null }: { pages: any, menu?: any | null }) {
     let selectedPage: typeof pages | null = null;
 
-    const [menuData, setMenuData] = useState<{ article_id: number; title: string; href: string }[]>([]);
+    const [menuData, setMenuData] = useState<{ id: number, article_id: number; title: string; href: string }[]>([]);
     const [pageListData, setPageListData] = useState<typeof pages>(pages);
 
     useEffect(() => {
         setPageListData(pages);
+        if (menu !== null) {
+            setMenuData(
+                menu.menu_items.map((m: any) => ({
+                    id: m.id,
+                    article_id: m.article_id ?? m.id, // fallback if no article_id
+                    title: m.title,
+                    href: m.href
+                }))
+            );
+            menu.menu_items.forEach((m: any) => {
+                onChangeUrlSelect(m.article_id);
+                addMenuItem(m.article_id);
+                removePageFromList(m.article_id);
+            });
+        }
     }, [pages]);
 
     const removePageFromList = (article_id: number) => {
@@ -46,6 +61,7 @@ export default function NavigationEditor({ pages }: { pages: any }) {
                             <div className="hidden sm:ml-6 sm:block">
                                 <div className="flex space-x-4">
                                     {menuData.length > 0 && menuData.map((item) => (
+
                                         <Link href={item.href} key={item.article_id}
                                               onClick={(e: any) => (e.preventDefault())}
                                               className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">
