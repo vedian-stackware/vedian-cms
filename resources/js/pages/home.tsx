@@ -16,11 +16,40 @@ import { Config, Puck } from '@measured/puck';
 import { config } from '@/editors/editor.config';
 import '@measured/puck/puck.css';
 import { Render } from '@measured/puck';
+import { TopBar, TopBarActionGroup, TopBarLogoGroup, TopBarNavItemGroup } from '@/components/partials/top-bar';
+import { NavItem } from '@/components/partials/web-nav/nav-item';
 
 let hrefId = 0;
 
-export default function Home({ id, article, data }: { id: number, article: any, data: any }) {
+export default function Home({ id, article, data, menu }: { id: number, article: any, data: any, menu: any }) {
     hrefId = id;
     console.log(article);
-    return <Render config={config} data={data} />;
+    return (
+        <div>
+
+            <TopBar>
+                <TopBarLogoGroup>
+
+                </TopBarLogoGroup>
+                <TopBarNavItemGroup>
+                    {menu?.nav_items.length > 0 && menu.nav_items.map((item, idx) => (
+                        <NavItem key={`nav-item-${item.id}-${idx}`} href={item.href}
+                                 className="px-3 py-2 inline-flex rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">
+                            {item.title}
+                        </NavItem>
+                    ))}
+                </TopBarNavItemGroup>
+                <TopBarActionGroup>
+                    {menu?.action_items.length > 0 && menu.action_items.map((item, idx) => (
+                        <NavItem key={`nav-item-${item.id}-${idx}`} href={item.href}
+                                 className="px-3 py-2 inline-flex rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">
+                            {item.title}
+                        </NavItem>
+                    ))}
+                </TopBarActionGroup>
+            </TopBar>
+            <Render config={config} data={data} />
+        </div>
+    )
+        ;
 }

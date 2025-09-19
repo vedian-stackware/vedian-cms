@@ -8,6 +8,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
 
 interface NavProps {
     item?: any,
@@ -29,7 +30,7 @@ export function CrudNavItem({ children, onClick, ...props }: React.PropsWithChil
     return (
         <Link
             onClick={(e) => (e.preventDefault())}
-            className="px-3 py-2 inline-flex rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+            className="group px-3 py-2 inline-flex rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
             {...props}
         >
             {children}
@@ -61,6 +62,21 @@ export function NavItemDropdown({ children, ...props }: React.PropsWithChildren<
                     {children}
                 </DropdownMenuContent>
             </DropdownMenu>
+        </div>
+    );
+}
+
+export function NavActionInput({ children, ...props }: React.PropsWithChildren<NavProps>) {
+    return (
+        <div
+            className="group px-3 py-2 inline-flex rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+            {...props}
+        >
+            <Input name="action" />
+            <div
+                className="group-hover:inline-flex size-5 shrink-0 text-xs font-semibold border rounded-full border-transparent bg-red-600 text-white hover:bg-red-700 focus:outline-hidden focus:bg-red-700 disabled:opacity-50 cursor-pointer">
+                <PlusIcon />
+            </div>
         </div>
     );
 }

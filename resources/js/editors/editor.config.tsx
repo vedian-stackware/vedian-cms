@@ -2,13 +2,11 @@
 import { Config, Content } from '@measured/puck';
 import { JSX } from 'react';
 import { menuList } from '@/actions/App/Http/Controllers/Menus/MenuController';
-import { TopBar, NavGroup } from '@/components/partials/top-bar';
+import { TopBar, TopBarActionGroup, TopBarLogoGroup, TopBarNavItemGroup } from '@/components/partials/top-bar';
 import { NavItem } from '@/components/partials/web-nav/nav-item';
 
 type Props = {
-    Example: {
-        data: any
-    };
+
     Headings: {
         title: string,
         size: string
@@ -63,13 +61,6 @@ export const config: Config<Props> = {
                     { value: 'media', label: 'Media' },
                     { value: 'video', label: 'Video' }
                 ]
-            }, data: {
-                type: 'external',
-                fetchList: async () => {
-
-                    return await fetch(menuList().url).then((res) => res.json());
-
-                }
             }
 
         },
@@ -77,49 +68,16 @@ export const config: Config<Props> = {
             title: 'Your page',
             description: 'Lorem ipsum'
         },
-        render: ({ data, children, title, description }) => {
+        render: ({children, title, description }) => {
             return (
                 <div>
-                    <TopBar>
-                        {data && data.menu_items.map((item, idx) => (
-                            <NavItem key={`nav-item-${item.id}-${idx}`} href={item.href}
-                                     className="px-3 py-2 inline-flex rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">
-                                {item.title}
-                            </NavItem>
-                        ))}
-                    </TopBar>
                     {children}
                 </div>
             );
         }
     },
     components: {
-        Example: {
-            fields: {
-                data: {
-                    type: 'external',
-                    fetchList: async () => {
 
-                        return await fetch(menuList().url).then((res) => res.json());
-
-                    }
-                }
-            },
-            render: ({ data }) => {
-                return (
-                    <TopBar>
-                        {data && data.menu_items.map((item, idx) => (
-
-                            <NavItem href={item.href}
-                                     className="px-3 py-2 inline-flex rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">
-                                {item.title}
-                            </NavItem>
-
-                        ))}
-                    </TopBar>
-                );
-            }
-        },
         // Grid: {
         //     fields: {
         //         content: {

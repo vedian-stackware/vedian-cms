@@ -3,29 +3,48 @@ import * as React from 'react';
 interface TopBarContentProps extends React.ComponentProps<'main'> {
 }
 
-export function TopBar({ children, ...props }: React.ComponentProps<'nav'>) {
+export function TopBar({ children, ...props }: React.ComponentProps<'header'>) {
     return (
-        <nav
-            className="relative z-10 bg-violet-800/50 after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-violet-400/10">
-            <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-                <div className="relative flex h-16 items-center justify-between">
-                    <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                        <div className="hidden sm:ml-6 sm:block">
-                            <div className="flex space-x-4">
-                                {children}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
+        <header className="bg-gray-900">
+            <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+                {children}
+            </nav>
+        </header>
     );
 }
 
-export function NavGroup({ children, ...props }: React.ComponentProps<'div'>) {
+export function TopBarLogoGroup({ children, ...props }: TopBarContentProps) {
     return (
         <div className="group" {...props}>
-            {children}
+            <div className="flex lg:flex-1">
+                {/*{children}*/}
+                <a href="#" className="-m-1.5 p-1.5">
+                    <span className="sr-only">Your Company</span>
+                    <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt=""
+                         className="h-8 w-auto" />
+                </a>
+            </div>
+        </div>
+    );
+}
+
+export function TopBarActionGroup({ children, ...props }: TopBarContentProps) {
+
+    return (
+        <div {...props}>
+            <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+                {children}
+            </div>
+        </div>
+    );
+}
+
+export function TopBarNavItemGroup({ children, ...props }: React.ComponentProps<'div'>) {
+    return (
+        <div {...props}>
+            <div className="hidden lg:flex lg:gap-x-12">
+                {children}
+            </div>
         </div>
     );
 }
