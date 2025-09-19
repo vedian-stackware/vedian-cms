@@ -19,7 +19,7 @@ class MenuController extends Controller
     public function index()
     {
         return Inertia::render('menus', [
-            'menus' => Menu::all()
+            'menus' => Menu::with('menu_items')->get()
         ]);
     }
 

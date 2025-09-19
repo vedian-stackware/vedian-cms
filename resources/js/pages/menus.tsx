@@ -33,6 +33,9 @@ export default function Menus({ menus }: { menus: any }) {
                         <th scope="col"
                             className="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-white sm:pl-0">Title
                         </th>
+                        <th scope="col"
+                            className="py-3.5 pr-3 pl-4 text-left text-sm font-semibold text-white sm:pl-0">Title
+                        </th>
                         <th scope="col" className="py-3.5 pr-4 pl-3 sm:pr-0">
                             <span className="sr-only">Edit</span>
                         </th>
@@ -42,6 +45,15 @@ export default function Menus({ menus }: { menus: any }) {
                     {menus.map((menu: any) => (
                         <tr key={menu.id}>
                             <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-white sm:pl-0">{menu.name}</td>
+                            <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-white sm:pl-0">
+                                <ul className="flex">
+                                    {menu.menu_items.map((element: any) => (
+                                        <li className="px-2" key={element.id}>
+                                            <Link href={element.href}>{element.title}</Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </td>
                             <td className="py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0">
                                 <Link href={edit(menu.id).url}
                                       className="text-indigo-400 hover:text-indigo-300">
