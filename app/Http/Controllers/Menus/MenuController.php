@@ -78,9 +78,6 @@ class MenuController extends Controller
             $menu->menu_items()->createMany($items);
         }
 
-        $menu = Menu::with('menu_items')->find($menu->id);
-
-        dd($menu->toArray());
 
         return redirect()->route('menus');
     }
