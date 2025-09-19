@@ -2,8 +2,17 @@
 import { Config, Content } from '@measured/puck';
 import { JSX } from 'react';
 import { Input } from '@/components/ui/input';
+import { menus } from '@/routes';
+import { menuList } from '@/actions/App/Http/Controllers/Menus/MenuController';
+import { TopBar } from '@/components/partials/nav/top-bar';
+import { NavGroup, NavItem, NavItemDropdown } from '@/components/partials/nav/nav-item';
+import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
+import { Link } from '@inertiajs/react';
 
 type Props = {
+    Example: {
+        data: any
+    };
     Headings: {
         title: string,
         size: string
@@ -41,7 +50,7 @@ export const config: Config<Props> = {
     },
     root: {
         fields: {
-            title: {type: 'text'},
+            title: { type: 'text' },
             description: { type: 'textarea' },
             status: {
                 type: 'select', options: [
@@ -59,6 +68,7 @@ export const config: Config<Props> = {
                     { value: 'video', label: 'Video' }
                 ]
             }
+
         },
         defaultProps: {
             title: 'Your page',
@@ -67,14 +77,40 @@ export const config: Config<Props> = {
         render: ({ children, title, description }) => {
             return (
                 <div>
-                    <h1 className="text-base font-semibold text-3xl">{title}</h1>
-                    {/*<p>{description}</p>*/}
+                    {/*<h1 className="text-base font-semibold text-3xl">{title}</h1>*/}
+                    {/*/!*<p>{description}</p>*!/*/}
                     {children}
                 </div>
             );
         }
     },
     components: {
+        Example: {
+            fields: {
+                data: {
+                    type: 'external',
+                    fetchList: async () => {
+
+                        return await fetch(menuList().url).then((res) => res.json());
+
+                    }
+                }
+            },
+            render: ({ data }) => {
+                return (
+                    <TopBar>
+                        {data && data.menu_items.map((item, idx) => (
+
+                            <NavItem href={item.href}
+                                     className="px-3 py-2 inline-flex rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">
+                                {item.title}
+                            </NavItem>
+
+                        ))}
+                    </TopBar>
+                );
+            }
+        },
         Grid: {
             fields: {
                 content: {

@@ -23,6 +23,11 @@ class MenuController extends Controller
         ]);
     }
 
+    public function menuList()
+    {
+        return response()->json(Menu::with('menu_items')->get());
+    }
+
     public function pageList()
     {
         return response()->json(Article::linkables(Status::PUBLISHED));
