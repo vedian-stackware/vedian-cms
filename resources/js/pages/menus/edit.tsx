@@ -37,13 +37,8 @@ export default function Edit({ pages, menu }: { pages:any, menu: any }) {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Menu edit" />
             <MenusLayout>
-                <NavigationEditor pages={pages} menu={menu} />
-                <Button onClick={() => {
-                    router.put(
-                        update(menu.id).url,
-                        { name: 'test', items: data }
-                    );
-                }}>Save</Button>
+                <NavigationEditor pages={pages} menu={menu} method="put" url={update(menu.id).url}/>
+
             </MenusLayout>
 
         </AppLayout>

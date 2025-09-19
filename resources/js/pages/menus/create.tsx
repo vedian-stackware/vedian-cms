@@ -30,13 +30,7 @@ export default function Create({ pages }: { pages: any }) {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Menus create" />
             <MenusLayout>
-                <NavigationEditor pages={pages} />
-                <Button onClick={() => {
-                    router.post(
-                        store().url,
-                        { name: 'test', items: data }
-                    );
-                }}>Save</Button>
+                <NavigationEditor pages={pages} method="post" url={store().url} />
             </MenusLayout>
 
         </AppLayout>
