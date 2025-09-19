@@ -13,14 +13,15 @@ interface NavProps {
     item?: any,
     listData?: any,
     children?: React.ReactNode;
-    onClick?: () => void;
+    onClick?: (e?: any) => void;
+    onClickLink?: (e?: any) => void;
     onClickHandler?: (value: any) => void;
 }
 
-export function NavItem({ item, children, onClick, ...props }: React.PropsWithChildren<NavProps>) {
+export function NavItem({ item, children, onClick, onClickLink, ...props }: React.PropsWithChildren<NavProps>) {
     return (
         <Link
-            onClick={(e) => e.preventDefault()}
+            onClick={onClickLink}
             className="px-3 py-2 inline-flex rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
             {...props}
         >

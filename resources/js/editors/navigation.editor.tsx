@@ -68,7 +68,7 @@ export default function NavigationEditor({ pages, method, url, menu = null }: {
             <TopBar>
                 {menuData.length > 0 && menuData.map((item, idx) => (
                     <NavGroup key={`nav-group-${item.id}-${idx}`}>
-                        <NavItem key={`menu-item-${item.id}-${idx}`} item={item} onClick={() => removeMenuItem(item)}>
+                        <NavItem key={`menu-item-${item.id}-${idx}`} item={item} onClickLink={(e) => e.preventDefault()} onClick={() => removeMenuItem(item)}>
                             {item.title}
                         </NavItem>
                     </NavGroup>
@@ -78,7 +78,10 @@ export default function NavigationEditor({ pages, method, url, menu = null }: {
                         <NavItemDropdown>
                             {pageListData.map((p: any, idx: number) => (
                                 <DropdownMenuItem key={`dropdown-page-${p.article_id ?? idx}`}
-                                                  onClick={() => handleAddSelected(p.article_id)}>
+                                                  onClick={(e) => {
+                                                      e.preventDefault()
+                                                      handleAddSelected(p.article_id)
+                                                  }}>
                                     {p.title}
                                 </DropdownMenuItem>
                             ))}
