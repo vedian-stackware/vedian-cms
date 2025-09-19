@@ -10,8 +10,9 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { TopBar } from '@/components/partials/nav/top-bar';
-import { NavGroup, NavItem, NavItemDropdown } from '@/components/partials/nav/nav-item';
+import { TopBar, NavGroup } from '@/components/partials/top-bar';
+import { CrudNavItem, NavItemDropdown } from '@/components/partials/editor-nav/nav-item';
+import { NavItem } from '@/components/partials/web-nav/nav-item';
 import { Input } from '@/components/ui/input';
 
 
@@ -68,20 +69,19 @@ export default function NavigationEditor({ pages, method, url, menu = null }: {
             <TopBar>
                 {menuData.length > 0 && menuData.map((item, idx) => (
                     <NavGroup key={`nav-group-${item.id}-${idx}`}>
-                        <NavItem key={`menu-item-${item.id}-${idx}`} item={item} onClickLink={(e) => e.preventDefault()} onClick={() => removeMenuItem(item)}>
+                        <CrudNavItem key={`menu-item-${item.id}-${idx}`} onClick={() => removeMenuItem(item)}>
                             {item.title}
-                        </NavItem>
+                        </CrudNavItem>
                     </NavGroup>
                 ))}
                 {menuData.length >= 0 && pageListData.length > 0 && (
                     <NavGroup>
                         <NavItemDropdown>
                             {pageListData.map((p: any, idx: number) => (
-                                <DropdownMenuItem key={`dropdown-page-${p.article_id ?? idx}`}
-                                                  onClick={(e) => {
-                                                      e.preventDefault()
-                                                      handleAddSelected(p.article_id)
-                                                  }}>
+                                <DropdownMenuItem
+                                    key={`dropdown-page-${p.article_id ?? idx}`}
+                                    onClick={() => (handleAddSelected(p.article_id))}
+                                >
                                     {p.title}
                                 </DropdownMenuItem>
                             ))}

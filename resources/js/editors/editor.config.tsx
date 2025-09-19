@@ -1,13 +1,9 @@
 // editor.config.tsx
 import { Config, Content } from '@measured/puck';
 import { JSX } from 'react';
-import { Input } from '@/components/ui/input';
-import { menus } from '@/routes';
 import { menuList } from '@/actions/App/Http/Controllers/Menus/MenuController';
-import { TopBar } from '@/components/partials/nav/top-bar';
-import { NavGroup, NavItem, NavItemDropdown } from '@/components/partials/nav/nav-item';
-import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
-import { Link } from '@inertiajs/react';
+import { TopBar, NavGroup } from '@/components/partials/top-bar';
+import { NavItem } from '@/components/partials/web-nav/nav-item';
 
 type Props = {
     Example: {
@@ -33,9 +29,9 @@ type Props = {
         buttonReadMore: string,
         buttonLearnMore: string,
     };
-    Grid: {
-        content: Content;
-    }
+    // Grid: {
+    //     content: Content;
+    // }
 };
 
 export const config: Config<Props> = {
@@ -67,6 +63,13 @@ export const config: Config<Props> = {
                     { value: 'media', label: 'Media' },
                     { value: 'video', label: 'Video' }
                 ]
+            }, data: {
+                type: 'external',
+                fetchList: async () => {
+
+                    return await fetch(menuList().url).then((res) => res.json());
+
+                }
             }
 
         },
@@ -74,11 +77,17 @@ export const config: Config<Props> = {
             title: 'Your page',
             description: 'Lorem ipsum'
         },
-        render: ({ children, title, description }) => {
+        render: ({ data, children, title, description }) => {
             return (
                 <div>
-                    {/*<h1 className="text-base font-semibold text-3xl">{title}</h1>*/}
-                    {/*/!*<p>{description}</p>*!/*/}
+                    <TopBar>
+                        {data && data.menu_items.map((item, idx) => (
+                            <NavItem key={`nav-item-${item.id}-${idx}`} href={item.href}
+                                     className="px-3 py-2 inline-flex rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">
+                                {item.title}
+                            </NavItem>
+                        ))}
+                    </TopBar>
                     {children}
                 </div>
             );
@@ -111,23 +120,23 @@ export const config: Config<Props> = {
                 );
             }
         },
-        Grid: {
-            fields: {
-                content: {
-                    type: 'slot'
-                }
-            },
-            render: ({ content: Content }) => {
-                return <Content
-                    style={{
-                        display: 'grid',
-                        gridTemplateColumns: '1fr 1fr 1fr 1fr',
-                        gridTemplateRows: '1fr 1fr 1fr 1fr',
-                        gap: 16
-                    }}
-                />;
-            }
-        },
+        // Grid: {
+        //     fields: {
+        //         content: {
+        //             type: 'slot'
+        //         }
+        //     },
+        //     render: ({ content: Content }) => {
+        //         return <Content
+        //             style={{
+        //                 display: 'grid',
+        //                 gridTemplateColumns: '1fr 1fr 1fr 1fr',
+        //                 gridTemplateRows: '1fr 1fr 1fr 1fr',
+        //                 gap: 16
+        //             }}
+        //         />;
+        //     }
+        // },
         Headings: {
             fields: {
                 title: {
