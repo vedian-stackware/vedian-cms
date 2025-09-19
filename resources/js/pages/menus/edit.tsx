@@ -19,6 +19,7 @@ import { router } from '@inertiajs/react';
 import MenusLayout from '@/layouts/menus/layout';
 import NavigationEditor from '@/editors/navigation.editor';
 import { data } from '@/editors/navigation.editor';
+import { update } from '@/routes/menus';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -37,6 +38,12 @@ export default function Edit({ pages, menu }: { pages:any, menu: any }) {
             <Head title="Menu edit" />
             <MenusLayout>
                 <NavigationEditor pages={pages} menu={menu} />
+                <Button onClick={() => {
+                    router.put(
+                        update(menu.id).url,
+                        { name: 'test', items: data }
+                    );
+                }}>Save</Button>
             </MenusLayout>
 
         </AppLayout>
