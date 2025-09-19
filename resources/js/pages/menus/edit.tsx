@@ -20,6 +20,10 @@ import MenusLayout from '@/layouts/menus/layout';
 import NavigationEditor from '@/editors/navigation.editor';
 import { data } from '@/editors/navigation.editor';
 import { update } from '@/routes/menus';
+import { DndContext } from '@dnd-kit/core';
+import { Droppable } from '@/editors/Droppable';
+import { Draggable } from '@/editors/Draggable';
+import { useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -31,18 +35,31 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: create().url
     }
 ];
-export default function Edit({ pages, menu }: { pages:any, menu: any }) {
+export default function Edit({ pages, menu }: { pages: any, menu: any }) {
     console.log(menu);
+    const containers = ['A', 'B', 'C'];
+    const [parent, setParent] = useState(null);
+    const draggableMarkup = (
+        <Draggable id="draggable">Drag me</Draggable>
+    );
+
+    function handleDragEnd(event) {
+        const { over } = event;
+
+        // If the item is dropped over a container, set it as the parent
+        // otherwise reset the parent to `null`
+        setParent(over ? over.id : null);
+    }
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Menu edit" />
             <MenusLayout>
-                <NavigationEditor pages={pages} menu={menu} method="put" url={update(menu.id).url}/>
+
+                <NavigationEditor key='123' pages={pages} menu={menu} method="put" url={update(menu.id).url} />
 
             </MenusLayout>
 
         </AppLayout>
     );
 }
-
-

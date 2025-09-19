@@ -55,7 +55,7 @@ class MenuController extends Controller
             $menu->menu_items()->createMany($items);
         }
 
-        return redirect()->route('menus');
+        return redirect()->route('menus.edit', $menu);
     }
 
     public function edit(Menu $menu)
@@ -79,6 +79,7 @@ class MenuController extends Controller
         }
 
 
-        return redirect()->route('menus');
+        return Back();
+//        return redirect()->route('menus');
     }
 }
