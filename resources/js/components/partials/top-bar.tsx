@@ -3,7 +3,7 @@ import * as React from 'react';
 interface TopBarContentProps extends React.ComponentProps<'main'> {
 }
 
-export function TopBar({ children, ...props }: TopBarContentProps) {
+export function TopBar({ children, ...props }: React.ComponentProps<'nav'>) {
     return (
         <nav
             className="relative z-10 bg-violet-800/50 after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-violet-400/10">
@@ -19,5 +19,13 @@ export function TopBar({ children, ...props }: TopBarContentProps) {
                 </div>
             </div>
         </nav>
+    );
+}
+
+export function NavGroup({ children, ...props }: React.ComponentProps<'div'>) {
+    return (
+        <div className="group" {...props}>
+            {children}
+        </div>
     );
 }

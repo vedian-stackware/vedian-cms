@@ -18,10 +18,17 @@ interface NavProps {
     onClickHandler?: (value: any) => void;
 }
 
-export function NavItem({ item, children, onClick, onClickLink, ...props }: React.PropsWithChildren<NavProps>) {
+interface NavItemProps {
+    href?: string;
+    onClick?: (e?: any) => void;
+    onClickLink?: (e?: any) => void;
+    className?: string;
+}
+
+export function CrudNavItem({ children, onClick, ...props }: React.PropsWithChildren<NavItemProps>) {
     return (
         <Link
-            onClick={onClickLink}
+            onClick={(e) => (e.preventDefault())}
             className="px-3 py-2 inline-flex rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
             {...props}
         >
@@ -35,6 +42,7 @@ export function NavItem({ item, children, onClick, onClickLink, ...props }: Reac
         </Link>
     );
 }
+
 
 export function NavItemDropdown({ children, ...props }: React.PropsWithChildren<NavProps>) {
     return (
@@ -53,14 +61,6 @@ export function NavItemDropdown({ children, ...props }: React.PropsWithChildren<
                     {children}
                 </DropdownMenuContent>
             </DropdownMenu>
-        </div>
-    );
-}
-
-export function NavGroup({ children, ...props }: React.PropsWithChildren<NavProps>) {
-    return (
-        <div className="group" {...props}>
-            {children}
         </div>
     );
 }
