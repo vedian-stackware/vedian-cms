@@ -15,7 +15,7 @@ import { CrudNavItem, NavActionInput, NavItemDropdown } from '@/components/parti
 import { NavItem } from '@/components/partials/web-nav/nav-item';
 import { Input } from '@/components/ui/input';
 import { resolveAllData } from '@measured/puck';
-import { config } from '@/editors/editor.config';
+import { config } from '@/editors/page.editor.config';
 
 export default function NavigationEditor({ pages, method, url, navItems = null, actions = null, menu = null }: {
     pages: any,

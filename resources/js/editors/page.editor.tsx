@@ -1,5 +1,5 @@
 import { Puck } from '@measured/puck';
-import { config } from '@/editors/editor.config';
+import { config } from '@/editors/page.editor.config';
 // import '../../css/editors.css';
 import '@measured/puck/puck.css';
 import { router, usePage } from '@inertiajs/react';

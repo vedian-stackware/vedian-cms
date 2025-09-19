@@ -13,7 +13,7 @@
 // import { LoaderCircle } from 'lucide-react';
 // import { Select, SelectItem, SelectTrigger, SelectContent, SelectValue } from '@/components/ui/select';
 import { Config, Puck } from '@measured/puck';
-import { config } from '@/editors/editor.config';
+import { config } from '@/editors/page.editor.config';
 import '@measured/puck/puck.css';
 import { Render } from '@measured/puck';
 import { TopBar, TopBarActionGroup, TopBarLogoGroup, TopBarNavItemGroup } from '@/components/partials/top-bar';

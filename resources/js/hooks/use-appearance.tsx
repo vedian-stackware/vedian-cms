@@ -44,7 +44,7 @@ export function initializeTheme() {
 
     applyTheme(savedAppearance);
 
-    // Add the event listener for system theme changes...
+    // Add the event listener for system config changes...
     mediaQuery()?.addEventListener('change', handleSystemThemeChange);
 }
 

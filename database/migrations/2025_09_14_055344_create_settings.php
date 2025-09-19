@@ -37,7 +37,7 @@ return new class extends Migration {
             $table->string('youtube')->nullable();
 
             // Site behavior / appearance
-//            $table->string('theme')->nullable();       // e.g., default, dark, custom
+//            $table->string('config')->nullable();       // e.g., default, dark, custom
             $table->boolean('maintenance_mode')->default(false);
 
             $table->timestamps();

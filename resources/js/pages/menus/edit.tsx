@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import { LoaderCircle } from 'lucide-react';
 import { Select, SelectItem, SelectTrigger, SelectContent, SelectValue } from '@/components/ui/select';
 import { Puck } from '@measured/puck';
-import { config } from '@/editors/editor.config';
+import { config } from '@/editors/page.editor.config';
 import '@measured/puck/puck.css';
 import { router } from '@inertiajs/react';
 import MenusLayout from '@/layouts/menus/layout';

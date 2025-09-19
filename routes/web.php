@@ -23,6 +23,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     require __DIR__ . '/articles.php';
     require __DIR__ . '/menus.php';
+    require __DIR__ . '/config.php';
 
 });
 

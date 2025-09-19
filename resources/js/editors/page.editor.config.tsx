@@ -1,4 +1,4 @@
-// editor.config.tsx
+// page.editor.config.tsx
 import { Config, Content } from '@measured/puck';
 import { JSX } from 'react';
 import { menuList } from '@/actions/App/Http/Controllers/Menus/MenuController';
