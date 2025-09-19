@@ -16,12 +16,10 @@ use function response;
 
 class ArticleController extends Controller
 {
-    public function index(?string $status = 'published')
+    public function index(?string $status = null)
     {
-        $status = Status::tryFrom($status);
-
-        if (!$status instanceof \App\Enumerations\Status) {
-            return redirect(route('articles'));
+        if ($status !== null) {
+            $status = Status::tryFrom($status);
         }
 //        dd($status);
 

@@ -21,6 +21,15 @@ class MenuRequest extends FormRequest
             'items.*.slug' => ['required'],
             'items.*.href' => ['required'],
             'items.*.icon' => ['nullable'],
+
+
+            'actions' => ['nullable', 'array'],
+            'actions.*.id' => ['nullable'],
+            'actions.*.article_id' => ['required', 'exists:articles,id'],
+            'actions.*.title' => ['required'],
+            'actions.*.slug' => ['required'],
+            'actions.*.href' => ['required'],
+            'actions.*.icon' => ['nullable'],
         ];
     }
 
