@@ -14,7 +14,8 @@ class MenuRequest extends FormRequest
 
         return [
             'name' => ['required'],
-            'items' => ['required', 'array'],
+            'items' => ['nullable', 'array'],
+            'items.*.id' => ['nullable'],
             'items.*.article_id' => ['required', 'exists:articles,id'],
             'items.*.title' => ['required'],
             'items.*.slug' => ['required'],
