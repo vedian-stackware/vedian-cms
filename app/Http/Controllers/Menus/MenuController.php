@@ -55,7 +55,7 @@ class MenuController extends Controller
             $menu->menu_items()->createMany($items);
         }
 
-        return redirect()->route('menus.create');
+        return redirect()->route('menus');
     }
 
     public function edit(Menu $menu)
