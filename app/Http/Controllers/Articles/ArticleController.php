@@ -55,6 +55,7 @@ class ArticleController extends Controller
         $data['content'] = (object)json_decode($data['content']);
 
         $article = Article::create($data);
+        dd($article);
 
         return redirect()->route('articles.create');
     }

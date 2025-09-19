@@ -42,7 +42,7 @@ export default function Articles({ articles }: { articles: any }) {
                     </thead>
                     <tbody className="divide-y divide-white/10">
                     {articles.map((article: any) => (
-                        <tr key={article.id}>
+                        <tr key={article.article_id}>
                             <td className="py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-white sm:pl-0">{article.title}</td>
                             <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-400">{article.slug}</td>
                             <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-400">
@@ -56,7 +56,7 @@ export default function Articles({ articles }: { articles: any }) {
                             </td>
                             <td className="px-3 py-4 text-sm whitespace-nowrap text-gray-400">{article.type}</td>
                             <td className="py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0">
-                                <Link href={edit(article.id).url}
+                                <Link href={edit(article.article_id).url}
                                       className="text-indigo-400 hover:text-indigo-300">
                                     edit
                                 </Link>

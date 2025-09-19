@@ -5,10 +5,11 @@ import { Button } from '@/components/ui/button';
 import { MinusIcon, PlusIcon } from '@heroicons/react/16/solid';
 
 export let data: any[] = [];
+
 export default function NavigationEditor({ pages, menu = null }: { pages: any, menu?: any | null }) {
-    let selectedPage: typeof pages | null = null;
     const [menuData, setMenuData] = useState<{ id: number, article_id: number; title: string; href: string }[]>([]);
     const [pageListData, setPageListData] = useState<typeof pages>(pages);
+    const [selectedArticleId, setSelectedArticleId] = useState<string | null>(null);
 
     useEffect(() => {
         setPageListData(pages);
@@ -16,64 +17,52 @@ export default function NavigationEditor({ pages, menu = null }: { pages: any, m
             setMenuData(
                 menu.menu_items.map((m: any) => ({
                     id: m.id,
-                    article_id: m.article_id ?? m.id, // fallback if no article_id
+                    article_id: m.article_id ?? m.id,
                     title: m.title,
                     href: m.href
                 }))
             );
             menu.menu_items.forEach((m: any) => {
-                onChangeUrlSelect(m.article_id);
                 data.push(m);
-                addMenuItem(m.article_id);
                 removePageFromList(m.article_id);
             });
-            console.log(data);
         }
     }, [pages]);
 
     const removePageFromList = (article_id: number) => {
-        setPageListData((prev: typeof pages) => prev.filter((page: typeof pages) => page.article_id !== article_id));
+        setPageListData((prev: typeof pages) => prev.filter((page: any) => page.article_id !== article_id));
     };
-    const addPageToList = (article_id: number) => {
+
+    const addPageToList = (item: any) => {
         setPageListData((prev: typeof pages) => {
-            if (prev.some((item: { article_id: number }) => item.article_id === article_id)) {
-                return prev;
-            }
-            data = data.filter((item: { article_id: number }) => item.article_id !== selectedPage.article_id);
-            console.log(data);
-
-            return [...prev, selectedPage];
+            if (prev.some((p: any) => p.article_id === item.article_id)) return prev;
+            data = data.filter((i) => i.article_id !== item.article_id);
+            return [...prev, item];
         });
     };
-    const addMenuItem = (article_id: number) => {
-        setMenuData((prev: typeof menuData) => {
-            if (prev.some((item: { article_id: number }) => item.article_id === article_id)) {
-                return prev;
-            }
-            data.push(selectedPage);
-            console.log(data);
-            return [...prev, selectedPage];
+
+    const addMenuItem = (item: any) => {
+        setMenuData((prev: any) => {
+            if (prev.some((i: any) => i.article_id === item.article_id)) return prev;
+            data.push(item);
+            return [...prev, item];
         });
-    };
-    const removeMenuItem = (article_id: number) => {
-        setMenuData((prev: typeof menuData) => prev.filter((menu: {
-            article_id: number
-        }) => menu.article_id !== article_id));
-    };
-    const onChangeUrlSelect = (article_id: string) => {
-        selectedPage = pages.find((p: any) => p.article_id.toString() === article_id);
-    };
-    const onAddMenuPage = () => {
-        if (!selectedPage) return;
-        addMenuItem(selectedPage.article_id);
-        removePageFromList(selectedPage.article_id);
+        removePageFromList(item.article_id);
     };
 
-    const onRemoveMenuItem = (article_id: number) => {
-        selectedPage = pages.find((p: any) => p.article_id.toString() === article_id.toString());
-        removeMenuItem(selectedPage.article_id);
-        addPageToList(selectedPage.article_id);
+    const removeMenuItem = (item: any) => {
+        setMenuData((prev: any) => prev.filter((i: any) => i.article_id !== item.article_id));
+        addPageToList(item);
+    };
 
+    const handleSelectChange = (article_id: string) => {
+        setSelectedArticleId(article_id);
+    };
+
+    const handleAddSelected = () => {
+        if (!selectedArticleId) return;
+        const page = pageListData.find((p: typeof pages) => p.article_id.toString() === selectedArticleId);
+        if (page) addMenuItem(page);
     };
 
     return (
@@ -85,18 +74,21 @@ export default function NavigationEditor({ pages, menu = null }: { pages: any, m
                         <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                             <div className="hidden sm:ml-6 sm:block">
                                 <div className="flex space-x-4">
-                                    {menuData.length > 0 && menuData.map((item) => (
-                                        <div className="group">
-                                            <Link href={item.href} key={item.article_id}
-                                                  onClick={(e: any) => (e.preventDefault())}
-                                                  className=" px-3 py-2 inline-flex rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">
+                                    {menuData.map((item) => (
+                                        <div className="group" key={item.article_id}>
+                                            <Link
+                                                onClick={(e) => e.preventDefault()}
+                                                className="px-3 py-2 inline-flex rounded-md text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white"
+                                            >
                                                 {item.title}
                                                 <Button
-                                                    onClick={() => {
-                                                        onRemoveMenuItem(item.article_id);
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        removeMenuItem(item);
                                                     }}
-                                                    className="hidden group-hover:inline-flex size-5 shrink-0 text-xs font-semibold border rounded-full border-transparent bg-red-600 text-white hover:bg-red-700 focus:outline-hidden focus:bg-red-700 disabled:opacity-50 cursor-pointer ml-2 p-2">
-                                                    <i className="p-2"><MinusIcon /></i>
+                                                    className="hidden group-hover:inline-flex size-5 shrink-0 text-xs font-semibold border rounded-full border-transparent bg-red-600 text-white hover:bg-red-700 focus:outline-hidden focus:bg-red-700 disabled:opacity-50 cursor-pointer ml-2 p-2"
+                                                >
+                                                    <MinusIcon />
                                                 </Button>
                                             </Link>
                                         </div>
@@ -107,8 +99,9 @@ export default function NavigationEditor({ pages, menu = null }: { pages: any, m
                     </div>
                 </div>
             </nav>
-            <div className="flex rounded-lg">
-                <Select onValueChange={onChangeUrlSelect}>
+
+            <div className="flex rounded-lg mt-4">
+                <Select onValueChange={handleSelectChange}>
                     <SelectTrigger className="w-[200px] rounded-r-none">
                         <SelectValue placeholder="Select a page" />
                     </SelectTrigger>
@@ -121,9 +114,9 @@ export default function NavigationEditor({ pages, menu = null }: { pages: any, m
                     </SelectContent>
                 </Select>
                 <Button
-                    onClick={onAddMenuPage}
-                    title="123"
-                    className="size-9 shrink-0 inline-flex justify-center items-center gap-x-2 text-sm font-semibold border border-transparent bg-violet-600 text-white hover:bg-violet-700 focus:outline-hidden focus:bg-violet-700 disabled:opacity-50 disabled:pointer-events-none rounded-tl-none rounded-bl-none ">
+                    onClick={handleAddSelected}
+                    className="size-9 shrink-0 inline-flex justify-center items-center gap-x-2 text-sm font-semibold border border-transparent bg-violet-600 text-white hover:bg-violet-700 focus:outline-hidden focus:bg-violet-700 disabled:opacity-50 disabled:pointer-events-none rounded-tl-none rounded-bl-none"
+                >
                     <PlusIcon />
                 </Button>
             </div>
