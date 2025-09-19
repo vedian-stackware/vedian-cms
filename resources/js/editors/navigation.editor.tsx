@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { TopBar } from '@/components/partials/nav/top-bar';
 import { NavGroup, NavItem, NavItemDropdown } from '@/components/partials/nav/nav-item';
+import { Input } from '@/components/ui/input';
 
 
 export default function NavigationEditor({ pages, method, url, menu = null }: {
@@ -22,6 +23,7 @@ export default function NavigationEditor({ pages, method, url, menu = null }: {
 }) {
     const [menuData, setMenuData] = useState<{ id: number, article_id: number; title: string; href: string }[]>([]);
     const [pageListData, setPageListData] = useState<typeof pages>(pages);
+    const [menuName, setMenuName] = useState(menu?.name ?? '');
 
     useEffect(() => {
         setPageListData(pages);
@@ -60,6 +62,9 @@ export default function NavigationEditor({ pages, method, url, menu = null }: {
     };
     return (
         <div>
+            <Input name="name"
+                   value={menuName}
+                   onChange={(e) => setMenuName(e.target.value)} />
             <TopBar>
                 {menuData.length > 0 && menuData.map((item, idx) => (
                     <NavGroup key={`nav-group-${item.id}-${idx}`}>
@@ -86,12 +91,12 @@ export default function NavigationEditor({ pages, method, url, menu = null }: {
                 if (method === 'put') {
                     router.put(
                         url,
-                        { name: 'test', items: menuData }
+                        { name: menuName, items: menuData }
                     );
                 } else {
                     router.post(
                         url,
-                        { name: 'test', items: menuData }
+                        { name: menuName, items: menuData }
                     );
                 }
 
