@@ -50,8 +50,10 @@ class MenuController extends Controller
     {
         $menu = Menu::with('menu_items')->create($request->validated());
 
-        $menuItems = $menu->menu_items()->createMany($request->validated()['items']);
-        dd($menu->menu_items->toArray(), $menu->toArray());
+        if (isset($request->items)) {
+            $items = $request->validated()['items'];
+            $menu->menu_items()->createMany($items);
+        }
 
         return redirect()->route('menus.create');
     }
@@ -68,14 +70,17 @@ class MenuController extends Controller
 
     public function update(MenuRequest $request, menu $menu)
     {
+        $menu->update($request->validated());
 
-        $data = array_merge($request->validated(), $request->all());
-        $data['slug'] = Str::slug($data['title'], '-');
-        $data['content'] = (object)json_decode($data['content']);
+        if (isset($request->items)) {
+            $items = $request->validated()['items'];
+            $menu->menu_items()->delete();
+            $menu->menu_items()->createMany($items);
+        }
 
-        $menu->fill($data);
+        $menu = Menu::with('menu_items')->find($menu->id);
 
-        $menu->save();
+        dd($menu->toArray());
 
         return redirect()->route('menus');
     }
