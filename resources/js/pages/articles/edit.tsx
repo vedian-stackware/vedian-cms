@@ -22,7 +22,7 @@ export default function Edit({ article }: { article: any }) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Article edit" />
-            <ArticlesLayout>
+            <ArticlesLayout hidePanels>
                 <PageEditor router={update.put(article.id)} data={article.content} />
             </ArticlesLayout>
         </AppLayout>

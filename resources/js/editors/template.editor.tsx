@@ -1,5 +1,5 @@
 import { Puck } from '@measured/puck';
-import { config } from '@/editors/page.editor.config';
+import { config } from '@/editors/template.editor.config';
 // import '../../css/editors.css';
 import '@measured/puck/puck.css';
 import { router, usePage } from '@inertiajs/react';
@@ -7,18 +7,37 @@ import type { RouteDefinition } from '@/wayfinder';
 import { SharedData } from '@/types';
 
 let initialData: Record<string, any> = {};
+const SavePage = (puckData: any, e?: React.FormEvent) => {
+    if (e) e.preventDefault();
 
+    const method: string = initialData.router.method;
+    const url: string = initialData.router.url;
 
-export default function LayoutEditor({ data = null }: {
+    if (method === 'post') {
+        router.post(url, puckData, {
+            preserveState: false,
+            preserveScroll: true // optional
+        });
+    } else if (method === 'put') {
+        router.put(url, puckData, {
+            preserveState: false,
+            preserveScroll: true
+        });
+    }
+};
+export default function LayoutEditor({ router, data = null }: {
     router: RouteDefinition<any>,
     data?: any
 }) {
+    const { auth } = usePage<SharedData>().props;
     initialData = data || {};
-
+    initialData.router = router;
+    initialData.authorId = auth.user.id;
     return (
         <Puck
             config={config}
             data={initialData}
+            onPublish={SavePage}
         />
     );
 }

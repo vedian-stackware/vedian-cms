@@ -22,7 +22,7 @@ export default function Create() {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Article create" />
-            <ArticlesLayout>
+            <ArticlesLayout hidePanels>
                 <PageEditor router={store.post()} />
             </ArticlesLayout>
 

@@ -23,39 +23,43 @@ const sidebarNavItems: NavItem[] = [
     }
 ];
 
-export default function ArticlesLayout({ children }: PropsWithChildren) {
+export default function ArticlesLayout({ children, hidePanels }: PropsWithChildren<any>) {
     // When server-side rendering, we only render the layout on the client...
     if (typeof window === 'undefined') {
         return null;
     }
 
     const currentPath = window.location.pathname;
+    const showPanels = !hidePanels;
 
     return (
-        <div className="px-4 py-6">
-            <Heading title="Articles" description="Manage your content en news" />
-
+        <div className={showPanels ? 'px-4 py-6' : ''}>
+            {showPanels && (
+                <Heading title="Articles" description="Manage your content en news" />
+            )}
             <div className="flex flex-col lg:flex-row lg:space-x-12">
-                <aside className="w-full max-w-xl lg:w-48">
-                    <nav className="flex flex-col space-y-1 space-x-0">
-                        {sidebarNavItems.map((item, index) => (
-                            <Button
-                                key={`${typeof item.href === 'string' ? item.href : item.href.url}-${index}`}
-                                size="sm"
-                                variant="ghost"
-                                asChild
-                                className={cn('w-full justify-start', {
-                                    'bg-muted': currentPath === (typeof item.href === 'string' ? item.href : item.href.url)
-                                })}
-                            >
-                                <Link href={item.href} prefetch>
-                                    {item.icon && <item.icon className="h-4 w-4" />}
-                                    {item.title}
-                                </Link>
-                            </Button>
-                        ))}
-                    </nav>
-                </aside>
+                {showPanels && (
+                    <aside className="w-full max-w-xl lg:w-48">
+                        <nav className="flex flex-col space-y-1 space-x-0">
+                            {sidebarNavItems.map((item, index) => (
+                                <Button
+                                    key={`${typeof item.href === 'string' ? item.href : item.href.url}-${index}`}
+                                    size="sm"
+                                    variant="ghost"
+                                    asChild
+                                    className={cn('w-full justify-start', {
+                                        'bg-muted': currentPath === (typeof item.href === 'string' ? item.href : item.href.url)
+                                    })}
+                                >
+                                    <Link href={item.href} prefetch>
+                                        {item.icon && <item.icon className="h-4 w-4" />}
+                                        {item.title}
+                                    </Link>
+                                </Button>
+                            ))}
+                        </nav>
+                    </aside>
+                )}
 
                 <Separator className="my-6 lg:hidden" />
 
