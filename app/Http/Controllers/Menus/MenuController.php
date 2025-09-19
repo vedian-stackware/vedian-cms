@@ -9,9 +9,10 @@ use App\Models\Article;
 use App\Models\Menu;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use function array_merge;
+use function collect;
 use function dd;
-use function json_decode;
-use function redirect;
+use function json_decode;use function redirect;
 use function response;
 
 class MenuController extends Controller
@@ -23,9 +24,12 @@ class MenuController extends Controller
         ]);
     }
 
-    public function menuList()
+    public function menuList($menu = null)
     {
-        return response()->json(Menu::with('menu_items')->get());
+        if ($menu === null)
+            return response()->json(Menu::get());
+
+        return response()->json(Menu::find($menu));
     }
 
     public function pageList()
@@ -44,6 +48,7 @@ class MenuController extends Controller
 
     public function create()
     {
+
         return Inertia::render('menus/create', [
             'pages' => Article::linkables(Status::PUBLISHED),
             'statuses' => Status::cases(),
@@ -59,12 +64,19 @@ class MenuController extends Controller
             $items = $request->validated()['items'];
             $menu->menu_items()->createMany($items);
         }
+        if (isset($request->actions)) {
+            $items = collect($request->validated()['actions'])->map(function ($item) {
+                return $item + ['is_action' => 1];
+            });
+            $menu->menu_items()->createMany($items);
+        }
 
         return redirect()->route('menus.edit', $menu);
     }
 
     public function edit(Menu $menu)
     {
+        $menu = Menu::find($menu->id);
         return Inertia::render('menus/edit', [
             'pages' => Article::linkables(Status::PUBLISHED),
             'menu' => $menu,
@@ -76,12 +88,21 @@ class MenuController extends Controller
     public function update(MenuRequest $request, menu $menu)
     {
         $menu->update($request->validated());
+        $menu->menu_items()->delete();
 
         if (isset($request->items)) {
-            $items = $request->validated()['items'];
-            $menu->menu_items()->delete();
-            $menu->menu_items()->createMany($items);
+            $items = collect($request->validated()['items'])->map(function ($item) {
+                return $item + ['is_action' => 0];
+            })->toArray();
+            $menu->nav_items()->createMany($items);
         }
+        if (isset($request->actions)) {
+            $items = collect($request->validated()['actions'])->map(function ($item) {
+                return $item + ['is_action' => 1];
+            })->toArray();
+            $menu->action_items()->createMany($items);
+        }
+        dd($menu->toArray());
 
 
         return Back();

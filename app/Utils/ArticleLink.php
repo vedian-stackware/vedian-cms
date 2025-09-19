@@ -40,11 +40,15 @@ class ArticleLink
         return $this->model;
     }
 
-    public static function collect(Status $status)
+    public static function collect(?Status $status = null)
     {
         $articles = Article::select(['id', 'title', 'slug', 'status', 'type']);
 
-        if ($status !== Status::ALL) {
+        if ($status === null) {
+            $articles->whereIn('status', [Status::PUBLISHED, Status::DRAFT]);
+        }
+
+        if ($status && $status !== Status::ALL) {
             $articles->where('status', $status);
         }
 

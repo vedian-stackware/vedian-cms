@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->string('slug');
             $table->string('href');
             $table->string('icon')->nullable();
+            $table->boolean('is_action')->default(false);
 //            $table->string('type')->nullable();
 
             $table->foreignId('menu_id')->constrained('menus');

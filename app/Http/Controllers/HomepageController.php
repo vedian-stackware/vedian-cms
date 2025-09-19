@@ -6,6 +6,7 @@ use App\Enumerations\Status;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Articles\MenuRequest;
 use App\Models\Article;
+use App\Models\Menu;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -36,7 +37,8 @@ class HomepageController extends Controller
         return Inertia::render('home', [
             'id' => $article->id,
             'article' => $article,
-            'data' => $article->content
+            'data' => $article->content,
+            'menu' => Menu::find(1),
         ]);
     }
 }
